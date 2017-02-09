@@ -3,6 +3,7 @@ import time
 import datetime
 from PIL import ImageChops, Image
 import math
+from subprocess import call
 
 camera = picamera.PiCamera()
 
@@ -31,8 +32,14 @@ while True:
         for photo_counter in range(1,photo_count + 1):
             date_string = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
             print("Motion captured, taking photo {} of {}".format(photo_counter,photo_count))
-            camera.capture("dropbox/" + date_string + '.jpg')
+            filepath = "/home/pi/Desktop/webcam/dropbox/"
+            filename = date_string + '.jpg'
+            camera.capture(filepath + filename)
+            dropbox_script = "/home/pi/Dropbox-Uploader/dropbox_uploader.sh upload {} {}".format(filepath + filename, filename)
+            print(dropbox_script)
+            call([dropbox_script], shell = True)    
             time.sleep(1)
+            
         for i in range(1,sleep_time+1):
             print("Sensing motion again in {}".format(sleep_time-i))
             time.sleep(1)
