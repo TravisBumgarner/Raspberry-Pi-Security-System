@@ -1,21 +1,18 @@
-from picamera import PiCamera
+#from picamera import PiCamera
 import time
 import datetime
 from PIL import ImageChops, Image
 import math
 from subprocess import call
-import urllib
+import socket
 from threading import Thread
 import dropbox
        
 #Settings
 filepath = "/home/pi/Desktop/webcam/dropbox/"
 
-
-
-
 #Globals
-camera = PiCamera()
+#camera = PiCamera()
 
 def dropbox_upload(file):
     try:
@@ -27,15 +24,14 @@ def dropbox_upload(file):
     except:
         return False
 
-dropbox_upload("readme.txt")
-
-
-def internet_on():
+def is_connected():
     try:
-        urllib.request.urlopen('http://216.58.192.142')
+        host = socket.gethostbyname("www.google.com")
+        s = socket.create_connection((host, 80), 2)
         return True
     except:
-        return False
+        pass
+    return False
 
 def upload_failed_files():
     while True:
@@ -45,13 +41,13 @@ def upload_failed_files():
         queue_file_txt.close()
         if(len(files_to_upload) > 0):
             for index, file_name in enumerate(files_to_upload):
-                if(internet_on()): 
+                if(is_connected()):
                     success = dropbox_upload(file_name[:-1])
                     if(success):
                         print("Failed upload successful: {}".format(file_name[:-1]))
-                if(internet_on() and index +1 == len(files_to_upload)):
+                if(is_connected() and index +1 == len(files_to_upload)):
                     open("queue_file.txt","w").close() #Clear queue_file after all files upload
-                elif(internet_on() is False):
+                elif(is_connected() is False):
                     queue_file_txt = open("queue_file.txt","w")
                     print("\nInternet still down\n")
                     for file in files_to_upload[index:]:
@@ -110,10 +106,12 @@ def main():
         else:      
             print("No motion detected")
 
-
+"""
 if __name__ == "__main__":
     Thread(target = main).start()
     Thread(target = upload_failed_files).start()
+"""
+
    
                     
 

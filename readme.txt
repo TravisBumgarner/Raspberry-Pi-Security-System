@@ -1,7 +1,11 @@
 Setup
 
 Required Python Packages
-1. dropbox
+1. dropbox - File Uploader
+2. pillow - Image Processor
+
+Required Hardware
+1. Raspberry Pi camera
 
 
 
