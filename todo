@@ -4,3 +4,8 @@ Install an init function that creates the required directories on first run
 Create command line controls and help
 
 check the everything runs when there is internet/isn't
+
+get rasppi to auto start with vncserver:
+http://www.penguintutor.com/linux/tightvnc
+
+How to deal with full files

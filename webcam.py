@@ -8,7 +8,13 @@ import socket
 from threading import Thread
 import dropbox
 from config import wc_config #Contains all settings
-       
+
+
+
+#Used to work with images directory
+import os
+
+
 # Settings
 filepath = "/home/pi/Desktop/webcam/dropbox/"
 
@@ -19,7 +25,7 @@ def print_log(text_to_log):
     """
     Print text to log.txt file and command line
     """
-    print(text_to_log)
+    print_log(text_to_log)
     f = open("log.txt", "a")
     f.write(text_to_log + "\n")
     f.close()
@@ -114,7 +120,12 @@ def delay_motion_detection(duration):
         time.sleep(1)
 
 
-def motion_found():
+def motion_found(test_images_directory):
+    """
+    Takes two images, checks if motion is detected between the two.
+    :param test_images_directory: location where images will be saved
+    :return:
+    """
     time.sleep(1)
     camera.capture("img1.jpg")
     time.sleep(1)
@@ -127,7 +138,7 @@ def motion_found():
     return True if(image_entropy(diff) > 5) else False
 
 
-def main():        
+def webcam():
     while True:
         if motion_found():
             take_photos(5)
@@ -135,10 +146,34 @@ def main():
         else:      
             print_log("No motion detected")
 
+
+def purge_old_files(images_folder, purge_age):
+    """
+    Any file older than (now - purge_age) will be deleted
+    :param images_folder: Directory of files to be checked
+    :param purge_age: Measured in days
+    :return:
+    """
+    now = datetime.datetime.now()
+    delta = datetime.timedelta(days = purge_age)
+    cutoff_date = now - delta
+
+    list_of_image_files = [f for f in os.listdir(images_folder) if os.path.isfile(os.path.join(images_folder, f))]
+    for image_file in list_of_image_files:
+        image_file_date = datetime.datetime.strptime(image_file[:-4], "%Y-%m-%d-%H-%M-%S")
+        if cutoff_date > image_file_date:
+            print_log("Deleting {}".format(image_file))
+            os.remove(images_folder + "/" + image_file)
+        else:
+            print_log("Not deleting {} because {}".format(image_file, cutoff_date))
+
+    time.sleep(60*60*24)
+
 """
 if __name__ == "__main__":
-    Thread(target = main).start()
+    Thread(target = webcam).start()
     Thread(target = upload_failed_files).start()
+    Thread(target = purge_old_files).start()
 """
 
    
