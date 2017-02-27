@@ -10,12 +10,12 @@ import dropbox
 from config import wc_config #Contains all settings
 import os
 from file_manager import File_Manager
-
+from webcam2 import Webcam
 # Settings
 filepath = "/home/pi/Desktop/webcam/dropbox/"
 
 # Globals
-# camera = PiCamera()
+#
 
 def print_log(text_to_log):
     """
@@ -67,54 +67,6 @@ def upload_files():
                 print_log("Upload Success: {}".format(file_manager.last_pop))
 
 
-def image_entropy(img):
-    """Calculate the entropy of an image"""
-    histogram = img.histogram()
-    histogram_length = sum(histogram)
-    samples_probability = [float(h) / histogram_length for h in histogram]
-    return -sum([p * math.log(p,2) for p in samples_probability if p != 0])
-
-
-def take_photos(photo_count):
-    for photo_counter in range(1,photo_count + 1):
-        date_string = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-        print_log("Motion captured, taking photo {} of {}".format(photo_counter,photo_count))
-        filename = date_string + '.jpg'
-        camera.capture(filepath + filename)
-        if is_connected():
-            dropbox_upload(filename)
-            print_log("Image Uploaded {}".format(filename))
-        else:
-            print_log("Internet offline, saving for later.")
-            queue_file(filepath + filename)
-            # Save filename to list if upload fails.
-        time.sleep(1)
-
-
-def delay_motion_detection(duration):
-    for i in range(1,duration+1):
-        print_log("Sensing motion again in {}".format(duration-i))
-        time.sleep(1)
-
-
-def motion_found(test_images_directory):
-    """
-    Takes two images, checks if motion is detected between the two.
-    :param test_images_directory: location where images will be saved
-    :return:
-    """
-    time.sleep(1)
-    camera.capture("img1.jpg")
-    time.sleep(1)
-    camera.capture("img2.jpg")
-
-    img1 = Image.open("img1.jpg")
-    img2 = Image.open("img2.jpg")
-    diff = ImageChops.difference(img1, img2)
-    print_log("image_entropy {}".format(image_entropy(diff)))
-    return True if(image_entropy(diff) > 5) else False
-
-
 def webcam():
     while True:
         if motion_found():
@@ -149,6 +101,7 @@ def purge_old_files(images_folder, purge_age):
 
 if __name__ == "__main__":
     file_manager = File_Manager("./offline_images", "./online_images")
+    webcam = Webcam("./offline_images","./test_images")
     # Thread(target = webcam).start()
     Thread(target = upload_files).start()
     # Thread(target = purge_old_files).start()

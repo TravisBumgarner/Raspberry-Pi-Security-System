@@ -9,7 +9,8 @@ get rasppi to auto start with vncserver:
 http://www.penguintutor.com/linux/tightvnc
 
 
-
+Remove references for print_log from inside class
+Rename webcam2 to webcam
 
 
 
