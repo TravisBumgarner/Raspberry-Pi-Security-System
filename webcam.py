@@ -8,12 +8,8 @@ import socket
 from threading import Thread
 import dropbox
 from config import wc_config #Contains all settings
-
-
-
-#Used to work with images directory
 import os
-
+from file_manager import File_Manager
 
 # Settings
 filepath = "/home/pi/Desktop/webcam/dropbox/"
@@ -36,7 +32,7 @@ def dropbox_upload(file):
     Try to upload file to dropbox, return true if successful, otherwise false
     """
     try:
-        dropbox_auth_token = open("dropbox_app_info.txt", "r").read()
+        dropbox_auth_token = open("dropbox_auth.txt", "r").read()
         client = dropbox.client.DropboxClient(dropbox_auth_token)
         f = open(file, 'rb')
         response = client.put_file('/' + file, f)
@@ -58,30 +54,17 @@ def is_connected():
     return False
 
 
-def upload_failed_files(file_name_txt):
+def upload_files():
     """
     Takes files that failed to upload due to internet being down
     and tries to upload them.
     """
-    while True:
-        queue_file_txt = open("queue_file.txt")
-        files_to_upload = queue_file_txt.readlines()
-        
-        queue_file_txt.close()
-        if len(files_to_upload) > 0:
-            for index, file_name in enumerate(files_to_upload):
-                if is_connected():
-                    success = dropbox_upload(file_name[:-1])
-                    if success:
-                        print_log("Failed upload successful: {}".format(file_name[:-1]))
-                if is_connected() and index +1 == len(files_to_upload):
-                    open("queue_file.txt","w").close() # Clear queue_file after all files upload
-                elif is_connected() is False:
-                    queue_file_txt = open("queue_file.txt","w")
-                    print_log("\nInternet still down\n")
-                    for file in files_to_upload[index:]:
-                        queue_file_txt.write(file_name)
-                    time.sleep(30) # Sleep for 10 minutes then try again.
+    while file_manager.size > 0:
+        if is_connected():
+            success = dropbox_upload(file_manager.get_next())
+            if success:
+                file_manager.dequeue()
+                print_log("Upload Success: {}".format(file_manager.last_pop))
 
 
 def image_entropy(img):
@@ -90,12 +73,6 @@ def image_entropy(img):
     histogram_length = sum(histogram)
     samples_probability = [float(h) / histogram_length for h in histogram]
     return -sum([p * math.log(p,2) for p in samples_probability if p != 0])
-
-
-def queue_file(file_name):
-    queue_file_txt = open("queue_file.txt","a")
-    queue_file_txt.write(file_name + "\n")
-    queue_file_txt.close()
 
 
 def take_photos(photo_count):
@@ -144,7 +121,7 @@ def webcam():
             take_photos(5)
             delay_motion_detection(30)
         else:      
-            print_log("No motion detected")
+            print_log("No motion detected: {}".format(datetime.datetime.now()))
 
 
 def purge_old_files(images_folder, purge_age):
@@ -169,12 +146,13 @@ def purge_old_files(images_folder, purge_age):
 
     time.sleep(60*60*24)
 
-"""
+
 if __name__ == "__main__":
-    Thread(target = webcam).start()
-    Thread(target = upload_failed_files).start()
-    Thread(target = purge_old_files).start()
-"""
+    file_manager = File_Manager("./offline_images", "./online_images")
+    # Thread(target = webcam).start()
+    Thread(target = upload_files).start()
+    # Thread(target = purge_old_files).start()
+
 
    
                     
