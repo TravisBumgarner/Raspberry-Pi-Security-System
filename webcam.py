@@ -1,14 +1,13 @@
 #from picamera import PiCamera
 import time
 import datetime
-from PIL import ImageChops, Image
-import math
+
 from subprocess import call
 import socket
 from threading import Thread
 import dropbox
-from config import wc_config #Contains all settings
 import os
+
 from file_manager import File_Manager
 from webcam2 import Webcam
 # Settings
@@ -67,11 +66,13 @@ def upload_files():
                 print_log("Upload Success: {}".format(file_manager.last_pop))
 
 
-def webcam():
+def capture_photos():
     while True:
-        if motion_found():
-            take_photos(5)
-            delay_motion_detection(30)
+        if Webcam.detect_motion() is True:
+            delay_time = 30
+            Webcam.take_photos(5)
+            print_log("Motion detected: {}".format(datetime.datetime.now()))
+            Webcam.wait(delay_time)
         else:      
             print_log("No motion detected: {}".format(datetime.datetime.now()))
 
@@ -102,7 +103,7 @@ def purge_old_files(images_folder, purge_age):
 if __name__ == "__main__":
     file_manager = File_Manager("./offline_images", "./online_images")
     webcam = Webcam("./offline_images","./test_images")
-    # Thread(target = webcam).start()
+    # Thread(target = capture_photos).start()
     Thread(target = upload_files).start()
     # Thread(target = purge_old_files).start()
 
