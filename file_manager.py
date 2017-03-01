@@ -19,8 +19,8 @@ class File_Manager():
     def dequeue(self):
         if self.size != 0:
             self.last_pop = self.queue.pop()
-            f_src = os.path.abspath(self.offline_directory) + "\\" + self.last_pop
-            f_des = os.path.abspath(self.online_directory) + "\\" + self.last_pop
+            f_src = os.path.abspath(self.offline_directory) + "/" + self.last_pop
+            f_des = os.path.abspath(self.online_directory) + "/" + self.last_pop
             os.rename(f_src, f_des)
             self.size -= 1
 

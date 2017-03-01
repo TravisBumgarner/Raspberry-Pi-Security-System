@@ -1,3 +1,156 @@
 cats! and dogs!
 cats! and dogs!
 cats! and dogs!
+Motion detected: 2017-03-01 00:41:16.103622
+Motion detected: 2017-03-01 00:41:54.301845
+No motion detected: 2017-03-01 00:42:28.659810
+No motion detected: 2017-03-01 00:42:32.038344
+No motion detected: 2017-03-01 00:42:35.381790
+No motion detected: 2017-03-01 00:42:38.811154
+No motion detected: 2017-03-01 00:42:42.831674
+No motion detected: 2017-03-01 00:42:46.193466
+No motion detected: 2017-03-01 00:42:49.604814
+No motion detected: 2017-03-01 00:42:53.025236
+No motion detected: 2017-03-01 00:42:56.432566
+No motion detected: 2017-03-01 00:42:59.835483
+No motion detected: 2017-03-01 00:43:03.917180
+No motion detected: 2017-03-01 00:43:07.321757
+No motion detected: 2017-03-01 00:43:10.679657
+No motion detected: 2017-03-01 00:43:14.114168
+No motion detected: 2017-03-01 00:43:17.461883
+No motion detected: 2017-03-01 00:43:20.833931
+Motion detected: 2017-03-01 00:43:27.388141
+No motion detected: 2017-03-01 00:44:00.829186
+No motion detected: 2017-03-01 00:44:04.297115
+No motion detected: 2017-03-01 00:44:07.722530
+No motion detected: 2017-03-01 00:44:11.104383
+No motion detected: 2017-03-01 00:44:14.509710
+No motion detected: 2017-03-01 00:44:17.933398
+No motion detected: 2017-03-01 00:44:21.328982
+No motion detected: 2017-03-01 00:44:24.720304
+No motion detected: 2017-03-01 00:44:28.141642
+No motion detected: 2017-03-01 00:44:31.528644
+No motion detected: 2017-03-01 00:44:34.919405
+No motion detected: 2017-03-01 00:44:38.316252
+No motion detected: 2017-03-01 00:44:41.736310
+No motion detected: 2017-03-01 00:44:45.143384
+No motion detected: 2017-03-01 00:44:48.524012
+No motion detected: 2017-03-01 00:44:51.910821
+No motion detected: 2017-03-01 00:44:55.290872
+No motion detected: 2017-03-01 00:44:58.658535
+No motion detected: 2017-03-01 00:45:02.043036
+No motion detected: 2017-03-01 00:45:05.414977
+No motion detected: 2017-03-01 00:45:08.815057
+Motion detected: 2017-03-01 00:45:15.408101
+No motion detected: 2017-03-01 00:45:48.839750
+No motion detected: 2017-03-01 00:45:52.226690
+No motion detected: 2017-03-01 00:45:55.617336
+No motion detected: 2017-03-01 00:45:59.037205
+No motion detected: 2017-03-01 00:46:02.439856
+No motion detected: 2017-03-01 00:46:05.774368
+Not deleting 2017-03-01-00-41-52.jpg because 2017-01-30 00:46:13.956210
+Not deleting 2017-03-01-00-43-24.jpg because 2017-01-30 00:46:13.956210
+Not deleting 2017-03-01-00-43-25.jpg because 2017-01-30 00:46:13.956210
+Not deleting 2017-03-01-00-43-26.jpg because 2017-01-30 00:46:13.956210
+Not deleting 2017-03-01-00-41-13.jpg because 2017-01-30 00:46:13.956210
+Not deleting 2017-03-01-00-41-12.jpg because 2017-01-30 00:46:13.956210
+Not deleting 2017-03-01-00-45-13.jpg because 2017-01-30 00:46:13.956210
+Not deleting 2017-03-01-00-41-50.jpg because 2017-01-30 00:46:13.956210
+Not deleting 2017-03-01-00-45-12.jpg because 2017-01-30 00:46:13.956210
+Not deleting 2017-03-01-00-45-14.jpg because 2017-01-30 00:46:13.956210
+Not deleting 2017-03-01-00-41-15.jpg because 2017-01-30 00:46:13.956210
+Not deleting 2017-03-01-00-41-51.jpg because 2017-01-30 00:46:13.956210
+Not deleting 2017-03-01-00-41-14.jpg because 2017-01-30 00:46:13.956210
+No motion detected: 2017-03-01 00:46:17.355374
+No motion detected: 2017-03-01 00:46:20.762197
+No motion detected: 2017-03-01 00:46:24.143554
+No motion detected: 2017-03-01 00:47:11.936644
+No motion detected: 2017-03-01 00:47:15.302349
+No motion detected: 2017-03-01 00:47:18.674730
+No motion detected: 2017-03-01 00:47:22.043759
+No motion detected: 2017-03-01 00:47:25.384410
+No motion detected: 2017-03-01 00:47:28.797908
+No motion detected: 2017-03-01 00:47:32.220125
+Motion detected: 2017-03-01 00:47:38.766325
+No motion detected: 2017-03-01 00:48:11.959971
+No motion detected: 2017-03-01 00:48:15.051568
+No motion detected: 2017-03-01 00:48:18.241473
+No motion detected: 2017-03-01 00:48:21.390898
+Motion detected: 2017-03-01 00:48:27.219406
+No motion detected: 2017-03-01 00:49:00.398081
+No motion detected: 2017-03-01 00:49:03.616353
+No motion detected: 2017-03-01 00:49:06.776815
+Motion detected: 2017-03-01 00:49:12.537284
+Motion detected: 2017-03-01 00:49:49.122083
+Motion detected: 2017-03-01 00:50:26.985347
+Motion detected: 2017-03-01 01:15:01.917094
+Motion detected: 2017-03-01 01:18:04.128505
+No motion detected: 2017-03-01 01:18:47.461811
+Motion detected: 2017-03-01 01:19:32.078634
+No motion detected: 2017-03-01 01:23:39.449790
+Motion detected: 2017-03-01 01:23:54.484670
+Motion detected: 2017-03-01 01:24:24.220493
+File upload success: 2017-03-01-01-23-51.jpg at 2017-03-01 01:24:25.345685
+No motion detected: 2017-03-01 01:24:55.103121
+File upload success: 2017-03-01-01-23-51.jpg at 2017-03-01 01:24:57.152546
+Motion detected: 2017-03-01 01:25:01.698773
+Motion detected: 2017-03-01 01:26:03.957415
+File upload success: 2017-03-01-01-23-51.jpg at 2017-03-01 01:26:05.965687
+Upload Success: 2017-03-01-01-23-51.jpg
+No motion detected: 2017-03-01 01:28:15.754800
+File upload success: 2017-03-01-00-50-23.jpg at 2017-03-01 01:28:21.261698
+Upload Success: 2017-03-01-00-50-23.jpg
+Motion detected: 2017-03-01 01:28:22.932212
+File upload success: 2017-03-01-01-24-58.jpg at 2017-03-01 01:28:26.528369
+Upload Success: 2017-03-01-01-24-58.jpg
+2017-03-01 01:32:11.418818 -- No motion detected
+2017-03-01 01:32:13.179220 -- File upload success: <type 'file'>
+2017-03-01 01:32:14.844490 -- No motion detected
+2017-03-01 01:33:41.640151 -- No motion detected
+2017-03-01 01:33:45.636409 -- File upload success: 2017-03-01-00-49-47.jpg
+2017-03-01 01:33:49.776303 -- Motion detected
+2017-03-01 01:33:51.109699 -- File upload success: 2017-03-01-00-48-24.jpg
+2017-03-01 01:34:00.257407 -- File upload success: 2017-03-01-01-22-58.jpg
+2017-03-01 01:34:10.945940 -- File upload success: 2017-03-01-01-28-21.jpg
+2017-03-01 01:34:16.533111 -- File upload success: 2017-03-01-00-41-14.jpg
+2017-03-01 01:34:17.420770 -- File upload success: 2017-03-01-01-33-24.jpg
+2017-03-01 01:34:23.060983 -- File upload success: 2017-03-01-00-41-51.jpg
+2017-03-01 01:34:26.383169 -- Motion detected
+2017-03-01 01:34:27.905596 -- File upload success: 2017-03-01-00-48-25.jpg
+2017-03-01 01:34:42.355156 -- File upload success: 2017-03-01-00-50-22.jpg
+2017-03-01 01:34:52.761702 -- File upload success: 2017-03-01-00-49-09.jpg
+2017-03-01 01:35:03.003360 -- Motion detected
+2017-03-01 01:35:04.020532 -- File upload success: 2017-03-01-01-21-39.jpg
+2017-03-01 01:35:15.391578 -- File upload success: 2017-03-01-01-26-03.jpg
+2017-03-01 01:35:26.624149 -- File upload success: 2017-03-01-00-41-15.jpg
+2017-03-01 01:35:36.054488 -- File upload success: 2017-03-01-00-47-38.jpg
+2017-03-01 01:35:39.678293 -- Motion detected
+2017-03-01 01:35:45.373470 -- File upload success: 2017-03-01-00-45-14.jpg
+2017-03-01 01:35:56.690282 -- File upload success: 2017-03-01-01-15-01.jpg
+2017-03-01 01:36:06.673515 -- File upload success: 2017-03-01-00-45-12.jpg
+2017-03-01 01:36:13.125172 -- No motion detected
+2017-03-01 01:36:16.727715 -- No motion detected
+2017-03-01 01:36:16.773063 -- File upload success: 2017-03-01-01-15-00.jpg
+2017-03-01 01:36:20.099250 -- No motion detected
+2017-03-01 01:36:24.038433 -- No motion detected
+2017-03-01 01:36:27.437642 -- No motion detected
+2017-03-01 01:36:28.097556 -- File upload success: 2017-03-01-01-19-30.jpg
+2017-03-01 01:36:30.813980 -- No motion detected
+2017-03-01 01:36:34.183959 -- No motion detected
+2017-03-01 01:36:37.550197 -- No motion detected
+2017-03-01 01:36:40.896147 -- No motion detected
+2017-03-01 01:36:44.257611 -- No motion detected
+2017-03-01 01:36:47.644545 -- No motion detected
+2017-03-01 01:36:50.773480 -- File upload success: 2017-03-01-00-48-26.jpg
+2017-03-01 01:36:54.072711 -- Motion detected
+2017-03-01 01:37:02.654952 -- File upload success: 2017-03-01-01-24-21.jpg
+2017-03-01 01:37:13.705012 -- File upload success: 2017-03-01-01-24-59.jpg
+2017-03-01 01:37:14.349286 -- File upload success: 2017-03-01-01-21-41.jpg
+2017-03-01 01:37:24.064324 -- File upload success: 2017-03-01-01-22-59.jpg
+2017-03-01 01:37:30.681356 -- Motion detected
+2017-03-01 01:37:34.319933 -- File upload success: 2017-03-01-01-28-19.jpg
+2017-03-01 01:37:45.679963 -- File upload success: 2017-03-01-01-28-22.jpg
+2017-03-01 01:37:57.185680 -- File upload success: 2017-03-01-01-21-40.jpg
+2017-03-01 01:38:06.184469 -- File upload success: 2017-03-01-00-47-36.jpg
+2017-03-01 01:38:07.334560 -- Motion detected
+2017-03-01 01:38:16.639391 -- File upload success: 2017-03-01-01-18-02.jpg
