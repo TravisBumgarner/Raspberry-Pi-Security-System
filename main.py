@@ -5,6 +5,7 @@ from subprocess import call
 import socket
 from threading import Thread
 import dropbox
+from dropbox import MaxRetryError
 import os
 
 # Classes used for security camera
@@ -34,8 +35,10 @@ def dropbox_upload(file):
         f = open(config["offline_images_directory"] + "/" + file, 'rb')
         response = client.put_file('/' + file, f)
         return True
-    except:
+    except MaxRetryError:
+        print("FAILURE!")
         return False
+
 
 
 def is_connected():
@@ -53,25 +56,35 @@ def is_connected():
 
 def upload_files():
     """
-    Takes files that failed to upload due to internet being down
-    and tries to upload them.
+    Tries to upload each file in queue
     """
-    while file_manager.size > 0:
-        if is_connected():
+    while True:
+        print("size: {}".format(file_manager.size))
+        print("is_connected: {}".format(is_connected()))
+        if file_manager.size > 0 and is_connected():
             success = dropbox_upload(file_manager.get_next())
+            print("success: {}".format(success))
             if success:
                 print_log("{} -- File upload success: {}".format(datetime.datetime.now(),file_manager.get_next()))
                 file_manager.dequeue()
+        time.sleep(1)
                 
 
 
 def capture_photos():
+    """
+    If motion is detected, take photo(s) and then wait until next motion
+    detection.
+    """
     while True:
         if webcam.detect_motion() is True:
-            delay_time = 30
-            webcam.take_photos(5)
             print_log("{} -- Motion detected".format(datetime.datetime.now()))
-            webcam.wait(delay_time)
+            for i in range(0,config["qty_of_photos"]):
+                filename = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S") + ".jpg"
+                webcam.take_photo(filename)
+                file_manager.enqueue(filename)
+                time.sleep(config["interval"])
+            webcam.wait(config["delay_time"])
         else:      
             print_log("{} -- No motion detected".format(datetime.datetime.now()))
 
@@ -96,14 +109,24 @@ def purge_old_files(images_folder, purge_age):
     time.sleep(60*60*24)
 
 
+def setup_dirs(*pathes):
+    for path in pathes:
+        if not os.path.exists(path):
+            os.makedirs(path)
+    
+
 if __name__ == "__main__":
+    
+    
     offline_dir = config["offline_images_directory"]
     online_dir = config["online_images_directory"]
     test_dir = config["test_images_directory"]
     purge_age = config["purge_age"]
+    setup_dirs(offline_dir,online_dir,test_dir)
         
     file_manager = File_Manager(offline_dir, online_dir)
     webcam = Webcam(offline_dir,test_dir)
+    
     Thread(target = capture_photos).start()
     Thread(target = upload_files).start()
     Thread(target = purge_old_files, args = (offline_dir,purge_age)).start()

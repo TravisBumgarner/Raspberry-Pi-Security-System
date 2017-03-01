@@ -18,14 +18,9 @@ class Webcam():
         samples_probability = [float(h) / histogram_length for h in histogram]
         return -sum([p * math.log(p, 2) for p in samples_probability if p != 0])
 
-    def take_photo(self):
-        date_string = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-        filename = date_string + '.jpg'
+    def take_photo(self, filename):
         self.camera.capture(self.images_directory + "/" + filename)
 
-    def take_photos(self,quantity):
-        for i in range(0,quantity):
-            self.take_photo()
 
     def wait(self,seconds):
         for i in range(1, seconds + 1):
