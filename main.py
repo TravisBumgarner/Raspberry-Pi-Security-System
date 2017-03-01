@@ -14,10 +14,6 @@ from webcam import Webcam
 #Config data
 from config import config
 
-
-# Settings
-#filepath = "/home/pi/Desktop/webcam/dropbox/"
-
 def print_log(text_to_log):
     """
     Print text to log.txt file and command line
@@ -97,18 +93,20 @@ def purge_old_files(images_folder, purge_age):
         if cutoff_date > image_file_date:
             print_log("{} -- Deleting {}".format(datetime.datetime.now(),image_file))
             os.remove(images_folder + "/" + image_file)
-        #else:
-        #    print_log("Not deleting {} because {}".format(image_file, cutoff_date))
-
     time.sleep(60*60*24)
 
 
 if __name__ == "__main__":
-    file_manager = File_Manager("./offline_images", "./online_images")
-    webcam = Webcam("./offline_images","./test_images")
+    offline_dir = config["offline_images_directory"]
+    online_dir = config["online_images_directory"]
+    test_dir = config["test_images_directory"]
+    purge_age = config["purge_age"]
+        
+    file_manager = File_Manager(offline_dir, online_dir)
+    webcam = Webcam(offline_dir,test_dir)
     Thread(target = capture_photos).start()
     Thread(target = upload_files).start()
-    Thread(target = purge_old_files, args = ("./offline_images",30)).start()
+    Thread(target = purge_old_files, args = (offline_dir,purge_age)).start()
 
 
    
