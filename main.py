@@ -5,7 +5,6 @@ from subprocess import call
 import socket
 from threading import Thread
 import dropbox
-from dropbox import MaxRetryError
 import os
 
 # Classes used for security camera
@@ -29,15 +28,15 @@ def dropbox_upload(file):
     """
     Try to upload file to dropbox, return true if successful, otherwise false
     """
-    try:
-        dropbox_auth_token = config["dropbox_key"]
-        client = dropbox.client.DropboxClient(dropbox_auth_token)
-        f = open(config["offline_images_directory"] + "/" + file, 'rb')
-        response = client.put_file('/' + file, f)
-        return True
-    except MaxRetryError:
-        print("FAILURE!")
-        return False
+    #try:
+    dropbox_auth_token = config["dropbox_key"]
+    client = dropbox.client.DropboxClient(dropbox_auth_token)
+    f = open(config["offline_images_directory"] + "/" + file, 'rb')
+    response = client.put_file('/' + file, f)
+    return True
+    #except MaxRetryError:
+    #    print("FAILURE!")
+    #    return False
 
 
 
