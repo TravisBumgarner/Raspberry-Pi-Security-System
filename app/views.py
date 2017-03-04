@@ -12,7 +12,7 @@ def index():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        flash('{} is requesting access to view images for {}...'.format(form.openid.data, form.visit_reason.data))
+        flash('{} is requesting access to view images for {}...'.format(form.openid.data, form.visit_select.data))
         return redirect('/index')
     return render_template('login.html', form=form)
 

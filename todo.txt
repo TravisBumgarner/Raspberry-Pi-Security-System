@@ -1,3 +1,8 @@
+Left off Point
+    1. Finish models
+
+
+
 Not Started
     1. Build website with sqlite first and then update with mySQL
 
