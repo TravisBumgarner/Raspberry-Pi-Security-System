@@ -1,0 +1,11 @@
+Not Started
+    1. Build website with sqlite first and then update with mySQL
+
+
+
+In Progress
+    1. Learn about OpenID and alternatives - Part III of the Tutorial and SA Forums
+
+
+
+Completed
