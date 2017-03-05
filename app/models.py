@@ -8,7 +8,7 @@ class User(db.Model):
 
     def __repr__(self):
         # Tells us out to print objects of this class, used for debugging
-        return '<User {}>'.format(self.email)
+        return '<User {}>'.format(self.name)
 
 class User_Request(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -16,4 +16,8 @@ class User_Request(db.Model):
     visit_select = db.Column(db.String(50))
     visit_description = db.Column(db.String(500))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __repr__(self):
+        # Tells us out to print objects of this class, used for debugging
+        return '<User {}>'.format(self.user_id)
 
