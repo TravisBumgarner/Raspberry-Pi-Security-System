@@ -1,11 +1,18 @@
 from flask import render_template, flash, redirect
 from app import app
 from .forms import LoginForm #Imports form from forms.py
+from .functions import get_images
+
 
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html')
+    logged_in = True
+    if logged_in:
+        gallery = get_images()
+        return render_template('index_signedin.html',gallery = gallery)
+    if not logged_in:
+        return render_template('index_signedout.html')
 
 
 @app.route('/login', methods = ['GET','POST'])

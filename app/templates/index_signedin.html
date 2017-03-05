@@ -1,0 +1,13 @@
+<!-- Extends base.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="col-xs-8 col-xs-offset-2">
+    <h1>Secret Access.</h1>
+    {% for image in gallery %}
+        Hi
+        <img src ="{{ image }}">
+    {% endfor %}
+</div>
+
+{% endblock %}
