@@ -10,10 +10,9 @@ def index():
     logged_in = True
     if logged_in:
         gallery = get_images()
-        return render_template('index_signedin.html',gallery = gallery)
+        return render_template('index_signedin.html',gallery = gallery, logged_in = logged_in)
     if not logged_in:
-        return render_template('index_signedout.html')
-
+        return render_template('index_signedout.html', logged_in = logged_in)
 
 @app.route('/login', methods = ['GET','POST'])
 def login():
@@ -23,6 +22,10 @@ def login():
         return redirect('/index')
     return render_template('login.html', form=form)
 
+@app.route('/logout')
+def logout():
+    logged_in = False
+    return render_template('index_signedout.html', logged_in = logged_in)
 
 
 
