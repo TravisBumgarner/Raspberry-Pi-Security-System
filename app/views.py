@@ -10,7 +10,11 @@ def index():
     logged_in = True
     if logged_in:
         gallery = get_images()
-        return render_template('index_signedin.html',gallery = gallery, logged_in = logged_in)
+        display_dates = ["2017","2016","2015"]
+        return render_template('index_signedin.html',
+                               gallery = gallery,
+                               logged_in = logged_in,
+                               display_dates = display_dates)
     if not logged_in:
         return render_template('index_signedout.html', logged_in = logged_in)
 

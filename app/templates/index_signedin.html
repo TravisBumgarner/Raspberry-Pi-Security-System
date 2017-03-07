@@ -4,8 +4,16 @@
 {% block content %}
 <div class="col-xs-8 col-xs-offset-2">
     <h1>Secret Access.</h1>
+    <form action = "" id = "dateSelect">
+        <select name="date">
+            {% for each_date in display_dates %}
+            <option value = "{{ each_date }}">{{ each_date }}</option>
+            {% endfor %}
+        </select>
+    </form>
+
     {% for image in gallery %}
-        <img src ="{{ image }}">
+        <img src ="{{ url_for('static', filename = 'img/')}}{{ image }}" class = "img-responsive">
     {% endfor %}
 </div>
 
