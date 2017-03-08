@@ -13,7 +13,8 @@
     </form>
 
     {% for image in gallery %}
-        <img src ="{{ url_for('static', filename = 'img/')}}{{ image }}" class = "img-responsive">
+        <img src ="{{ url_for('static', filename = 'img/' + image) }}" class = "img-responsive">
+
     {% endfor %}
 </div>
 

@@ -9,8 +9,9 @@ Not Started
 
 
 In Progress
-    1. Learn about OpenID and alternatives - Part III of the Tutorial and SA Forums
+    1. Figure out why DB won't create password_hash column
 
 
 
 Completed
+    1. Learn about OpenID and alternatives - Part III of the Tutorial and SA Forums
