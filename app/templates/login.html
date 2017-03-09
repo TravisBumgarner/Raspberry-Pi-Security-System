@@ -7,10 +7,13 @@
     <form action="" method="post" name="login">
         {{ form.hidden_tag() }}
             <p>
-              Please enter your Email:<br>
+              Email:<br>
               {{ form.email(size=30) }}{% for error in form.email.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}<br>
             </p>
-
+            <p>
+              Password:<br>
+              {{ form.password(size=30) }}{% for error in form.password.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}<br>
+            </p>
             <p>Reason for visit: <br>
                 {{ form.visit_select }}{% for error in form.visit_select.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}<br>
             </p>

@@ -4,6 +4,12 @@
 {% block content %}
 <div class="col-xs-8 col-xs-offset-2">
     <h1>Secret Access.</h1>
+    <h2>Hello,
+        {% if current_user.is_authenticated %}
+            {{ current_user.name }}
+        {% else %}
+            Stranger
+        {% endif %}!</h2>
     <form action = "" id = "dateSelect">
         <select name="date">
             {% for each_date in display_dates %}

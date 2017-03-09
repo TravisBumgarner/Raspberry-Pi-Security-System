@@ -9,11 +9,13 @@ class LoginForm(Form):
     email = StringField('Email', validators=[DataRequired(),
                                              Length(1,64),
                                              Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
     visit_select = SelectField('visit_select',
                                  choices=[(None, ''), ('theft','Theft'),('reason','Other Reason')],
                                  validators=[DataRequired()]
                                  )
     visit_description = TextAreaField('visit_description', validators=[DataRequired()])
+
 
 class RegistrationForm(Form):
     name = StringField('Name', validators=[DataRequired(),
