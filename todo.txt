@@ -1,17 +1,19 @@
 Left off Point
-    1. Finish models
+
 
 
 
 Not Started
     1. Build website with sqlite first and then update with mySQL
-
+    2. Best way to let users access content
 
 
 In Progress
-    1. Figure out why DB won't create password_hash column
+    1. Figure out auth.login issue - SA Forums
 
 
 
 Completed
     1. Learn about OpenID and alternatives - Part III of the Tutorial and SA Forums
+    2. Finish models
+    3. Figure out why DB won't create password_hash column

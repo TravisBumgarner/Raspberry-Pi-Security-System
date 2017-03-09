@@ -9,3 +9,6 @@ SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 # WTForms
 WTF_CSRF_ENABLED = True
 SECRET_KEY = 'you-will-never-guess'
+
+#Login
+LDAP_LOGIN_VIEW = 'adsfsdfsdfogin'

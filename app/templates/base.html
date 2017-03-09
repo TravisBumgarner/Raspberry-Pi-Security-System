@@ -10,19 +10,30 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-xs-8 col-xs-offset-2">
+        <div class="col-xs-6 col-xs-offset-2">
             <ul class="nav nav-pills">
                 <li role="presentation"><a href="/index">Web Viewer</a></li>
-                <li role="presentation"><a href="/login">Login</a></li>
-                <li role="presentation"><a href="/logout">Logout</a></li>
-                <li role="presentation"><a href="/register">Register</a></li>
+                {% if current_user.is_authenticated %}
+                    <li role="presentation"><a href="/logout">Logout</a></li>
+                {% else %}
+                    <li role="presentation"><a href="/login">Login</a></li>
+                    <li role="presentation"><a href="/register">Register</a></li>
+                {% endif %}
             </ul>
-            <hr>
+        </div>
+        <div class="col-xs-4">
+            <h2>Hello,
+                {% if current_user.is_authenticated %}
+                    {{ current_user.name }}!
+                {% else %}
+                    Stranger!
+                {% endif %}
+            </h2>
         </div>
     </div>
-            {% block content %}
-            {% endblock %}
-        </div>
+    <hr>
+    {% block content %}
+    {% endblock %}
     </div>
 </div>
 
