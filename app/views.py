@@ -13,16 +13,16 @@ def index():
 
 @app.route('/web_viewer', methods = ['GET','POST'])
 def web_viewer():
-    gallery = get_images()
+    gallery = []
     form = ImageFilterForm()
     test_string = 'Before Post'
     if form.validate_on_submit():
-        gallery = get_images() #insert date range into get_images function
+        gallery = get_images(form.start_date.data,form.end_date.data) #insert date range into get_images function
         test_string = 'Getting photos for dates between {} and {}'.format(form.start_date.data, form.end_date.data)
     return render_template('index_signedin.html',
                            form=form,
                            test_string = test_string,
-                           gallery=[])
+                           gallery=gallery)
 
 @app.route('/register', methods = ['GET','POST'])
 def register():
