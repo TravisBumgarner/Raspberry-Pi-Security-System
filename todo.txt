@@ -1,16 +1,20 @@
 Left off Point
 
 
-
-
 Not Started
     1. Build website with sqlite first and then update with mySQL
-    2. Best way to let users access content
+    2. Put all static content behind a block
+    3. Lazy load images
+    4. Add url_for() for all links (pg 32)
+    5. Configure secret key (pg 38)
+    6. Setup tablenames (pg 54)
+
+
 
 
 In Progress
     1. Figure out auth.login issue - SA Forums
-
+    2. Best way to let users access content - Add auth email that only goes to me.
 
 
 Completed

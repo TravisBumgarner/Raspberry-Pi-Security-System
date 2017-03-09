@@ -15,13 +15,10 @@ def index():
 def web_viewer():
     gallery = []
     form = ImageFilterForm()
-    test_string = 'Before Post'
     if form.validate_on_submit():
         gallery = get_images(form.start_date.data,form.end_date.data) #insert date range into get_images function
-        test_string = 'Getting photos for dates between {} and {}'.format(form.start_date.data, form.end_date.data)
     return render_template('index_signedin.html',
                            form=form,
-                           test_string = test_string,
                            gallery=gallery)
 
 @app.route('/register', methods = ['GET','POST'])

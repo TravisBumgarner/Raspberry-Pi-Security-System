@@ -1,12 +1,12 @@
 from flask_wtf import Form
 from wtforms import StringField, SelectField, TextAreaField, PasswordField, DateField, ValidationError
-from wtforms.validators import DataRequired, Email, Length, Regexp, EqualTo
+from wtforms.validators import DataRequired, Email, Length, Regexp, EqualTo, Optional
 from .models import User
 
 
 class ImageFilterForm(Form):
-    start_date = DateField('Start date')
-    end_date = DateField('End date')
+    start_date = DateField('Start date', validators=[Optional()])
+    end_date = DateField('End date', validators=[Optional()])
 
 class LoginForm(Form):
     email = StringField('Email', validators=[DataRequired(),

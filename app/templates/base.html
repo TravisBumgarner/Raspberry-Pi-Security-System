@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Web Viewer</title>
+    <!-- CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
@@ -12,7 +13,8 @@
     <div class="row">
         <div class="col-xs-6 col-xs-offset-2">
             <ul class="nav nav-pills">
-                <li role="presentation"><a href="/index">Web Viewer</a></li>
+                <li role="presentation"><a href="/web_viewer">Web Viewer</a></li>
+                <li role="presentation"><a href="/index">Index</a></li>
                 {% if current_user.is_authenticated %}
                     <li role="presentation"><a href="/logout">Logout</a></li>
                 {% else %}
@@ -36,6 +38,14 @@
     {% endblock %}
     </div>
 </div>
+    <!-- JavaScript -->
+    <script src = "/static/js/lazyload.js" ></script>
+    <script>
+        var myLazyLoad = new LazyLoad({
+            threshold: 500,
+            throttle: 200
+        });
 
+    </script>
 </body>
 </html>

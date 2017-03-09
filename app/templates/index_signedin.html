@@ -7,16 +7,17 @@
   <form action="" method="post" name="login">
         {{ form.hidden_tag() }}
             <p>
-              {{ form.start_date }} {{ form.end_date }} <input type="submit" value="Filter">
+              {{ form.start_date }} {{ form.end_date }} <input type="submit" value="Filter"> (Leave empty to get all images)
                 {% for error in form.end_date.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}<br>
                 {% for error in form.start_date.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}
             </p>
     </form>
 
-    {{ test_string }}
-
     {% for image in gallery %}
-        <img src ="{{ url_for('static', filename = 'img/' + image) }}" class = "img-responsive">
+        <b>{{image}}</b>
+            <img data-original="{{ url_for('static', filename = 'img/' + image) }}" width="640" height="480">
+        <br>
+
     {% endfor %}
 </div>
 
