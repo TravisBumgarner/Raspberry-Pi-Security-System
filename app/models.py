@@ -5,9 +5,10 @@ from . import login_manager
 
 
 class User(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String(50), index=True, unique=True)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), index=True)
     email = db.Column(db.String(120), index=True, unique=True)
+    file_access = db.Column(db.Boolean, default=False, index=True)
     password_hash = db.Column(db.String(128), index=True)
     @property
     def password(self):
@@ -25,6 +26,7 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         # Tells us out to print objects of this class, used for debugging
         return '<User {}>'.format(self.name)
+
 
 class User_Request(db.Model):
     id = db.Column(db.Integer, primary_key = True)

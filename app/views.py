@@ -36,6 +36,7 @@ def register():
     if form.validate_on_submit():
         user = User(name=form.name.data,
                     email=form.email.data,
+                    file_access=False,
                     password = form.password.data)
         db.session.add(user)
         db.session.commit()
@@ -74,7 +75,23 @@ def logout():
     return redirect(url_for('index'))
 
 
+@app.route('/admin', methods=['GET', 'POST'])
+@login_required
+def admin():
 
+    
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        user = User(name=form.name.data,
+                    email=form.email.data,
+                    file_access=False,
+                    password=form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        # token = user.generate_confirmation_token()
 
+        flash('You will be notified when your account has been approved.')
+        return redirect(url_for('index'))
+    return render_template('register.html', form=form)
 
 
