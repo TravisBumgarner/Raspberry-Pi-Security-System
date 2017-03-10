@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect
+from flask import render_template, flash, redirect, url_for
 from flask_login import login_user, logout_user, login_required
 from app import app
 from .forms import LoginForm, RegistrationForm, ImageFilterForm #Imports form from forms.py
@@ -33,8 +33,10 @@ def register():
                     password = form.password.data)
         db.session.add(user)
         db.session.commit()
+        #token = user.generate_confirmation_token()
+
         flash('You will be notified when your account has been approved.')
-        return redirect('/index')
+        return redirect(url_for('index'))
     return render_template('register.html', form=form)
 
 
@@ -53,7 +55,7 @@ def login():
             db.session.add(user_request)
             db.session.commit()
             login_user(user, remember= False)
-            return redirect('/web_viewer')
+            return redirect(url_for('web_viewer'))
         flash('Invalid username or password.')
     return render_template('login.html', form=form)
 
@@ -63,7 +65,7 @@ def login():
 def logout():
     logout_user()
     flash('You have been logged out.')
-    return redirect('/index')
+    return redirect(url_for('index'))
 
 
 

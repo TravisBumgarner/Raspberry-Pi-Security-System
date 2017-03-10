@@ -12,7 +12,7 @@ def get_images(start, end):
 
     if start is None:
         delta = datetime.timedelta(days=365)
-        #If no start date is defined, get last year of images
+        #If no start date is defined, get last 365 days
         start_datetime = end_datetime - delta
     else:
         start_datetime = datetime.datetime(start.year, start.month, start.day)

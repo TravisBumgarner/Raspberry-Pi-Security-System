@@ -4,12 +4,12 @@ Left off Point
 Not Started
     1. Build website with sqlite first and then update with mySQL
     2. Put all static content behind a block
-
-    4. Add url_for() for all links (pg 32)
+    3. Password protect rasppi
     5. Configure secret key (pg 38)
-    6. Setup tablenames (pg 54)
     7. Figure out how to upload images to my server
-
+    8. Delay for bad login attempts
+    9. Email verfication and tempate
+    10. figure out uplaoding with rasppi
 
 
 In Progress
@@ -22,3 +22,4 @@ Completed
     3. Figure out why DB won't create password_hash column
     4. Lazy load images
     5. Figure out auth.login issue - SA Forums
+    6. Add url_for() for all links (pg 32)
