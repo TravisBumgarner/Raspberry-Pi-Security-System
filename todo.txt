@@ -9,6 +9,7 @@ Not Started
     8. Delay for bad login attempts
     9. Email verfication and tempate
     10. figure out uplaoding with rasppi
+    11. Look into HTTPS
 
 
 In Progress

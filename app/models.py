@@ -39,6 +39,14 @@ class User_Request(db.Model):
         # Tells us out to print objects of this class, used for debugging
         return '<User {}>'.format(self.user_id)
 
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+
+#from .models import User
+from app import db, admin
+from flask_admin.contrib.sqla import ModelView
+
+admin.add_view(ModelView(User, db.session))

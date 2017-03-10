@@ -52,18 +52,21 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        if user is not None and user.verify_password(form.password.data):
+        if user.file_access is False:
+            flash('Account activation is required.')
+        if user is None or user.verify_password(form.password.data) is False:
+            flash('Invalid username or password.')
+        if user is not None and user.verify_password(form.password.data) and user.file_access is True:
             user_request = User_Request(
-                date = datetime.datetime.now(),
-                visit_select = form.visit_select.data,
-                visit_description = form.visit_description.data,
-                user_id = user.id
+                date=datetime.datetime.now(),
+                visit_select=form.visit_select.data,
+                visit_description=form.visit_description.data,
+                user_id=user.id
             )
             db.session.add(user_request)
             db.session.commit()
             login_user(user, remember= False)
             return redirect(url_for('web_viewer'))
-        flash('Invalid username or password.')
     return render_template('login.html', form=form)
 
 
@@ -73,25 +76,3 @@ def logout():
     logout_user()
     flash('You have been logged out.')
     return redirect(url_for('index'))
-
-
-@app.route('/admin', methods=['GET', 'POST'])
-@login_required
-def admin():
-
-    
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        user = User(name=form.name.data,
-                    email=form.email.data,
-                    file_access=False,
-                    password=form.password.data)
-        db.session.add(user)
-        db.session.commit()
-        # token = user.generate_confirmation_token()
-
-        flash('You will be notified when your account has been approved.')
-        return redirect(url_for('index'))
-    return render_template('register.html', form=form)
-
-

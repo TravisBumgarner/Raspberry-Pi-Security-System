@@ -35,6 +35,16 @@
         </div>
     </div>
     <hr>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+        <hr>
+      {% endif %}
+    {% endwith %}
     {% block content %}
     {% endblock %}
     </div>

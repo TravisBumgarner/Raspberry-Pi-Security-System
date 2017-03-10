@@ -3,16 +3,6 @@
 
 {% block content %}
 <div class="col-xs-8 col-xs-offset-2">
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul class=flashes>
-        {% for message in messages %}
-          <li>{{ message }}</li>
-        {% endfor %}
-        </ul>
-        <hr>
-      {% endif %}
-    {% endwith %}
     <h1>Please login or register to continue.</h1>
 </div>
 {% endblock %}
