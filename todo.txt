@@ -3,7 +3,6 @@ Left off Point
 
 Not Started
     1. Build website with sqlite first and then update with mySQL
-    2. Put all static content behind a block
     3. Password protect rasppi
     5. Configure secret key (pg 38)
     7. Figure out how to upload images to my server
@@ -23,3 +22,4 @@ Completed
     4. Lazy load images
     5. Figure out auth.login issue - SA Forums
     6. Add url_for() for all links (pg 32)
+    7. Put all static content behind a block

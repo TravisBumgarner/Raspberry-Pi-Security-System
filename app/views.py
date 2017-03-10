@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, send_from_directory
 from flask_login import login_user, logout_user, login_required
 from app import app
 from .forms import LoginForm, RegistrationForm, ImageFilterForm #Imports form from forms.py
@@ -7,6 +7,7 @@ from .models import User, User_Request
 from . import db
 
 import datetime
+import os
 
 @app.route('/')
 @app.route('/index')
@@ -23,6 +24,11 @@ def web_viewer():
     return render_template('index_signedin.html',
                            form=form,
                            gallery=gallery)
+
+@app.route('/protected/<path:filename>')
+@login_required
+def protected(filename):
+    return send_from_directory('./security_photos', filename)
 
 @app.route('/register', methods = ['GET','POST'])
 def register():
