@@ -2,8 +2,10 @@ import os
 import datetime
 
 
-def get_images(start, end):
-    path = os.path.abspath("./app/static/img/")
+def get_images(start, end, sort_order):
+    # Sort order is either "old_to_new" or "new_to_old"
+    # By default the files in the folder are sorted in ascending order
+    path = os.path.abspath("./app/security_photos")
 
     if end is None:
         end_datetime = datetime.datetime.now()
@@ -11,8 +13,8 @@ def get_images(start, end):
         end_datetime = datetime.datetime(end.year, end.month, end.day)
 
     if start is None:
-        delta = datetime.timedelta(days=365)
-        #If no start date is defined, get last 365 days
+        delta = datetime.timedelta(days = 3650)
+        #If no start date is defined, get last 3650 days (10 years)
         start_datetime = end_datetime - delta
     else:
         start_datetime = datetime.datetime(start.year, start.month, start.day)
@@ -23,4 +25,7 @@ def get_images(start, end):
         image_file_date = datetime.datetime.strptime(image_file[:-4], "%Y-%m-%d-%H-%M-%S")
         if (image_file_date > start_datetime) and (image_file_date < end_datetime):
             image_list.append(image_file)
-    return image_list
+    if sort_order == "old_to_new":
+        return image_list
+    elif sort_order == "new_to_old":
+        return reversed(image_list)

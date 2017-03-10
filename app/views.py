@@ -14,21 +14,24 @@ import os
 def index():
     return render_template('index_signedout.html')
 
+
 @app.route('/web_viewer', methods = ['GET','POST'])
 @login_required
 def web_viewer():
     gallery = []
     form = ImageFilterForm()
     if form.validate_on_submit():
-        gallery = get_images(form.start_date.data,form.end_date.data) #insert date range into get_images function
+        gallery = get_images(form.start_date.data,form.end_date.data, form.sort_order.data) #insert date range into get_images function
     return render_template('index_signedin.html',
                            form=form,
                            gallery=gallery)
+
 
 @app.route('/protected/<path:filename>')
 @login_required
 def protected(filename):
     return send_from_directory('./security_photos', filename)
+
 
 @app.route('/register', methods = ['GET','POST'])
 def register():

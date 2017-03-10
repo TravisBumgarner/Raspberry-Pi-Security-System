@@ -6,3 +6,21 @@
 img{
     margin: 0px 0px 25px 0px;
 }
+
+#user_name {
+    padding: 10px 15px;
+}
+
+ul#sort_order{
+    display: inline;
+    margin: 0px;
+    padding: 0px;
+
+
+}
+
+ul#sort_order li{
+    display: inline;
+    padding: 0px 0px 0px 10px;
+
+}

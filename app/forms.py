@@ -1,5 +1,5 @@
 from flask_wtf import Form
-from wtforms import StringField, SelectField, TextAreaField, PasswordField, DateField, ValidationError
+from wtforms import StringField, SelectField, TextAreaField, PasswordField, DateField, RadioField, ValidationError
 from wtforms.validators import DataRequired, Email, Length, Regexp, EqualTo, Optional
 from .models import User
 
@@ -7,6 +7,7 @@ from .models import User
 class ImageFilterForm(Form):
     start_date = DateField('Start date', validators=[Optional()])
     end_date = DateField('End date', validators=[Optional()])
+    sort_order = RadioField('Sort Order', choices =[('old_to_new','Old to New'),('new_to_old','New to Old')])
 
 class LoginForm(Form):
     email = StringField('Email', validators=[DataRequired(),
@@ -14,10 +15,14 @@ class LoginForm(Form):
                                              Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     visit_select = SelectField('visit_select',
-                                 choices=[(None, ''), ('theft','Theft'),('reason','Other Reason')],
+                                 choices=[(None, ''),
+                                          ('theft','Theft'),
+                                          ('injury,', 'Injury'),
+                                          ('damage', 'Property Damage')],
                                  validators=[DataRequired()]
                                  )
-    visit_description = TextAreaField('visit_description', validators=[DataRequired()])
+    visit_description = TextAreaField('visit_description', validators=[DataRequired(),
+                                                                       Length(min=50)])
 
 
 class RegistrationForm(Form):

@@ -50,3 +50,4 @@ from app import db, admin
 from flask_admin.contrib.sqla import ModelView
 
 admin.add_view(ModelView(User, db.session))
+admin.add_view(ModelView(User_Request, db.session))

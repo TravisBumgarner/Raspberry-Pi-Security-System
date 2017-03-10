@@ -7,25 +7,37 @@
     <form action="" method="post" name="login">
         {{ form.hidden_tag() }}
             <p>
-              Email:<br>
-              {{ form.email(size=30) }}{% for error in form.email.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}<br>
+              Email: {% for error in form.email.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}<br>
+              {{ form.email(size=30) }}<br>
             </p>
             <p>
-              Password:<br>
-              {{ form.password(size=30) }}{% for error in form.password.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}<br>
+              Password: {% for error in form.password.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}<br>
+              {{ form.password(size=30) }}<br>
             </p>
-            <p>Reason for visit: <br>
-                {{ form.visit_select }}{% for error in form.visit_select.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}<br>
+            <p>Reason for visit: {% for error in form.visit_select.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}<br>
+                {{ form.visit_select(rows=200) }}<br>
             </p>
 
             <p>
-              Description:<br>
-              {{ form.visit_description(cols = 30, rows = 5) }}{% for error in form.visit_description.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}<br>
+                Description: <span id="char_required">(50 Char Required)</span> {% for error in form.visit_description.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}<br>
+              {{ form.visit_description(cols = 30, rows = 5) }}<br>
             </p>
 
 
         <p><input type="submit" value="Sign In"></p>
     </form>
 </div>
+<script>
+    $
+    $('textarea#visit_description').keyup(function(){
+        var desired_length = 50;
+        var current_length = $(this).val().length;
+        var remaining_chars = desired_length - current_length
+        if(remaining_chars < 0){remaining_chars = 0;}
+        $('#char_required').text("(" + remaining_chars + " Char Required)")
+    });
 
+
+
+</script>
 {% endblock %}

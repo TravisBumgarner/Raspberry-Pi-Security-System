@@ -6,17 +6,21 @@
     <!-- CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/css/style.css">
+
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
 
 <div class="container">
     <div class="row">
-        <div class="col-xs-6 col-xs-offset-2">
+        <div class="col-xs-8 col-xs-offset-2">
             <ul class="nav nav-pills">
 
                 {% if current_user.is_authenticated %}
                     <li role="presentation"><a href="/web_viewer">Web Viewer</a></li>
                     <li role="presentation"><a href="/logout">Logout</a></li>
+                    <li id = "user_name">User: {{ current_user.name }}</li>
                 {% else %}
                     <li role="presentation"><a href="/index">Index</a></li>
                     <li role="presentation"><a href="/login">Login</a></li>
@@ -24,27 +28,23 @@
                 {% endif %}
             </ul>
         </div>
-        <div class="col-xs-4">
-            <h2>Hello,
-                {% if current_user.is_authenticated %}
-                    {{ current_user.name }}!
-                {% else %}
-                    Stranger!
-                {% endif %}
-            </h2>
+    </div>
+    <div class="row">
+        <div class="col-xs-8 col-xs-offset-2">
+            <hr>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+                <hr>
+              {% endif %}
+            {% endwith %}
         </div>
     </div>
-    <hr>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul class=flashes>
-        {% for message in messages %}
-          <li>{{ message }}</li>
-        {% endfor %}
-        </ul>
-        <hr>
-      {% endif %}
-    {% endwith %}
+
     {% block content %}
     {% endblock %}
     </div>
