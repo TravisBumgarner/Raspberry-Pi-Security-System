@@ -3,8 +3,10 @@ from flask_login import login_user, logout_user, login_required
 from app import app
 from .forms import LoginForm, RegistrationForm, ImageFilterForm #Imports form from forms.py
 from .functions import get_images
-from .models import User
+from .models import User, User_Request
 from . import db
+
+import datetime
 
 @app.route('/')
 @app.route('/index')
@@ -12,6 +14,7 @@ def index():
     return render_template('index_signedout.html')
 
 @app.route('/web_viewer', methods = ['GET','POST'])
+@login_required
 def web_viewer():
     gallery = []
     form = ImageFilterForm()
@@ -41,6 +44,14 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user is not None and user.verify_password(form.password.data):
+            user_request = User_Request(
+                date = datetime.datetime.now(),
+                visit_select = form.visit_select.data,
+                visit_description = form.visit_description.data,
+                user_id = user.id
+            )
+            db.session.add(user_request)
+            db.session.commit()
             login_user(user, remember= False)
             return redirect('/web_viewer')
         flash('Invalid username or password.')

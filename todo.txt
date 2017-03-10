@@ -4,20 +4,21 @@ Left off Point
 Not Started
     1. Build website with sqlite first and then update with mySQL
     2. Put all static content behind a block
-    3. Lazy load images
+
     4. Add url_for() for all links (pg 32)
     5. Configure secret key (pg 38)
     6. Setup tablenames (pg 54)
-
+    7. Figure out how to upload images to my server
 
 
 
 In Progress
-    1. Figure out auth.login issue - SA Forums
-    2. Best way to let users access content - Add auth email that only goes to me.
+    1. Best way to let users access content - Add auth email that only goes to me.
 
 
 Completed
     1. Learn about OpenID and alternatives - Part III of the Tutorial and SA Forums
     2. Finish models
     3. Figure out why DB won't create password_hash column
+    4. Lazy load images
+    5. Figure out auth.login issue - SA Forums
