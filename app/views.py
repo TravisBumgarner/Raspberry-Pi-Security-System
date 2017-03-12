@@ -1,13 +1,15 @@
 from flask import render_template, flash, redirect, url_for, send_from_directory
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from app import app
 from .forms import LoginForm, RegistrationForm, ImageFilterForm #Imports form from forms.py
 from .functions import get_images
 from .models import User, User_Request
 from . import db
 
+
 import datetime
 import os
+
 
 @app.route('/')
 @app.route('/index')
@@ -21,7 +23,13 @@ def web_viewer():
     gallery = []
     form = ImageFilterForm()
     if form.validate_on_submit():
-        gallery = get_images(form.start_date.data,form.end_date.data, form.sort_order.data) #insert date range into get_images function
+        if current_user.file_access == True:
+            gallery = get_images(form.start_date.data,form.end_date.data, form.sort_order.data) #insert date range into get_images function
+        else:
+            gallery = []
+            flash('Account activation is required.')
+
+
     return render_template('index_signedin.html',
                            form=form,
                            gallery=gallery)
@@ -55,10 +63,10 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        if user.file_access is False:
-            flash('Account activation is required.')
         if user is None or user.verify_password(form.password.data) is False:
             flash('Invalid username or password.')
+        elif user.file_access is False:
+            flash('Account activation is required.')
         if user is not None and user.verify_password(form.password.data) and user.file_access is True:
             user_request = User_Request(
                 date=datetime.datetime.now(),

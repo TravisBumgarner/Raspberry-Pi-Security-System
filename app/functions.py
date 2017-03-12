@@ -1,7 +1,5 @@
 import os
 import datetime
-
-
 def get_images(start, end, sort_order):
     # Sort order is either "old_to_new" or "new_to_old"
     # By default the files in the folder are sorted in ascending order

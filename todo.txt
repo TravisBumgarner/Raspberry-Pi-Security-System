@@ -1,18 +1,14 @@
 Left off Point
 
 Issues
-    1. How to password protect /admin
+    1. Login for reason Admin does not permit access to photos
     2. How to upload images
 
-Not Startedgit
+Not Started:
     8. Delay for bad login attempts
-    11. Look into HTTPS
-    1. Figure out security of images
-    2. Filter images descending/accending
 
 In Progress
-    7. Figure out how to upload images to my server
-
+    1. How to only let admin view admin panel
 
 Completed
     1. Learn about OpenID and alternatives - Part III of the Tutorial and SA Forums
@@ -23,11 +19,16 @@ Completed
     6. Add url_for() for all links (pg 32)
     7. Put all static content behind a block
     8. Best way to let users access content - Add auth email that only goes to me. - Woo admin Panel!
+    9. Figure out security of images
+    10. Filter images descending/accending
+    11. How to password protect /admin
 
 Canceled
     1. Email verfication and template (Used file_access = False instead)
+    2. Look into HTTPS
 
 Later
     1. Build website with sqlite first and then update with mySQL
     3. Password protect rasppi
+    4. Move to Webfaction
     5. Configure secret key (pg 38)

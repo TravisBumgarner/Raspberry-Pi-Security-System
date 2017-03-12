@@ -9,6 +9,7 @@ class User(UserMixin, db.Model):
     name = db.Column(db.String(50), index=True)
     email = db.Column(db.String(120), index=True, unique=True)
     file_access = db.Column(db.Boolean, default=False, index=True)
+    admin_access = db.Column(db.Boolean, default=False, index=True)
     password_hash = db.Column(db.String(128), index=True)
     @property
     def password(self):
@@ -31,7 +32,7 @@ class User(UserMixin, db.Model):
 class User_Request(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     date = db.Column(db.DateTime)
-    visit_select = db.Column(db.String(50))
+    visit_select = db.Column(db.String(25))
     visit_description = db.Column(db.String(500))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
@@ -44,10 +45,3 @@ class User_Request(db.Model):
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-
-#from .models import User
-from app import db, admin
-from flask_admin.contrib.sqla import ModelView
-
-admin.add_view(ModelView(User, db.session))
-admin.add_view(ModelView(User_Request, db.session))

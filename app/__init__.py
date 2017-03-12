@@ -20,4 +20,4 @@ login_manager.init_app(app)
 admin = Admin(app)
 
 
-from app import views, models
+from app import views, models, admin_panel

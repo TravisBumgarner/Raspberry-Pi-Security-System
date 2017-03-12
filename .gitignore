@@ -1,3 +1,4 @@
 wv_venv/
 .idea/
 __pycache__/
+*.jpg
