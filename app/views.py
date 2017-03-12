@@ -29,7 +29,6 @@ def web_viewer():
             gallery = []
             flash('Account activation is required.')
 
-
     return render_template('index_signedin.html',
                            form=form,
                            gallery=gallery)
