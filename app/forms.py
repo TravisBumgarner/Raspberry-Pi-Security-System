@@ -17,7 +17,7 @@ class LoginForm(Form):
     visit_select = SelectField('visit_select',
                                  choices=[(None, ''),
                                           ('theft','Theft'),
-                                          ('injury,', 'Injury'),
+                                          ('injury', 'Injury'),
                                           ('damage', 'Property Damage'),
                                           ('admin', 'Admin')],
                                  validators=[DataRequired()]
