@@ -22,12 +22,16 @@ def web_viewer():
     gallery = []
     form = ImageFilterForm()
     if form.validate_on_submit():
-        if current_user.file_access == True:
+        # Get the reason for why the current user is visiting by looking at the form data from the last time they logged in.
+        current_user_request = User_Request.query.filter_by(user_id=current_user.id).order_by('date desc').limit(1)[0].visit_select
+        if current_user.file_access is True and current_user_request != "admin":
             gallery = get_images(form.start_date.data,form.end_date.data, form.sort_order.data) #insert date range into get_images function
-        else:
+        elif(current_user_request == "admin"):
+            gallery = []
+            flash('Admin access does not permit photo viewing. Please logout and try again.')
+        elif(current_user.file_access is False):
             gallery = []
             flash('Account activation is required.')
-
     return render_template('index_signedin.html',
                            form=form,
                            gallery=gallery)
@@ -80,6 +84,7 @@ def login():
             db.session.add(user_request)
             db.session.commit()
             login_user(user, remember= False)
+            flash(current_user.id)
             return redirect(url_for('web_viewer'))   
     return render_template('login.html', form=form)
 
