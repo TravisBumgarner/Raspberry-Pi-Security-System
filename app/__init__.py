@@ -21,3 +21,6 @@ admin = Admin(app)
 
 
 from app import views, models, admin_panel
+
+if __name__ == '__main__':
+    app.run(debug=False)
