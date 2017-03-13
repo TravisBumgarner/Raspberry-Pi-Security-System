@@ -18,11 +18,12 @@ class LoginForm(Form):
                                  choices=[(None, ''),
                                           ('theft','Theft'),
                                           ('injury,', 'Injury'),
-                                          ('damage', 'Property Damage')],
+                                          ('damage', 'Property Damage'),
+                                          ('admin', 'Admin')],
                                  validators=[DataRequired()]
                                  )
     visit_description = TextAreaField('visit_description', validators=[DataRequired(),
-                                                                       Length(min=50)])
+                                                                       Length(min=25)])
 
 
 class RegistrationForm(Form):

@@ -60,12 +60,17 @@ def register():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(email=form.email.data).first() 
         if user is None or user.verify_password(form.password.data) is False:
-            flash('Invalid username or password.')
+            flash('Invalid username or password.') 
+
+        elif form.visit_select.data == "admin" and user.admin_access == False:    
+            flash('Admin access required for this activity.')
+
         elif user.file_access is False:
             flash('Account activation is required.')
-        if user is not None and user.verify_password(form.password.data) and user.file_access is True:
+
+        elif user is not None and user.verify_password(form.password.data) and user.file_access is True:
             user_request = User_Request(
                 date=datetime.datetime.now(),
                 visit_select=form.visit_select.data,
@@ -75,7 +80,7 @@ def login():
             db.session.add(user_request)
             db.session.commit()
             login_user(user, remember= False)
-            return redirect(url_for('web_viewer'))
+            return redirect(url_for('web_viewer'))   
     return render_template('login.html', form=form)
 
 

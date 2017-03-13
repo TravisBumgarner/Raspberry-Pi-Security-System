@@ -15,11 +15,11 @@
               {{ form.password(size=30) }}<br>
             </p>
             <p>Reason for visit: {% for error in form.visit_select.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}<br>
-                {{ form.visit_select(rows=200) }}<br>
+                {{ form.visit_select }}<br>
             </p>
 
             <p>
-                Description: <span id="char_required">(50 Char Required)</span> {% for error in form.visit_description.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}<br>
+                Description: <span id="char_required">(25 Char Required)</span> {% for error in form.visit_description.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}<br>
               {{ form.visit_description(cols = 30, rows = 5) }}<br>
             </p>
 
@@ -30,7 +30,7 @@
 <script>
     $
     $('textarea#visit_description').keyup(function(){
-        var desired_length = 50;
+        var desired_length = 25;
         var current_length = $(this).val().length;
         var remaining_chars = desired_length - current_length
         if(remaining_chars < 0){remaining_chars = 0;}

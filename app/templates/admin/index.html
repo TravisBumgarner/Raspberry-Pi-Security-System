@@ -1,5 +1,23 @@
-{% extends 'admin/master.html' %}
+		{% extends 'admin/master.html' %}
 
-{% block body %}
-  <p>Hello world</p>
+		{% block body %}		
+<div class="row">
+	<div class="col-xs-4">
+		<h2>View Status:</h2>
+		<ul>
+			<li><b>Total Issues:</b> 3</li>
+			<li><b>Last Issue:</b> Property Damage </li>
+			<li><b>Last Issue Viewer:</b> John Doe</li>
+			<li><b>Last Issue Description:</b> The mitre sawblade was completely destroyed.</li>
+		</ul>
+	</div>
+	<div class="col-xs-4 col-xs-offset-2">
+		<h2>Raspberry Pi Status:</h2>
+		<ul>
+			<li><b>IP Address:</b> 192.168.000.000</li>
+			<li><b>Internet:</b> <span style="color:green">UP</span> </li>
+			<li><b>Last Down:</b> March 13, 2016 08:05</li>
+		</ul>
+	</div>
+</div>
 {% endblock %}
