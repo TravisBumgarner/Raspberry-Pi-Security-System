@@ -3,3 +3,7 @@
 .git/
 .idea/
 __pycache__/
+config.py
+offline_images/
+online_images/
+test_images/

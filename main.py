@@ -2,7 +2,7 @@ import time
 import datetime
 
 from subprocess import call
-import socket
+
 from threading import Thread
 import dropbox
 import os
@@ -10,9 +10,11 @@ import os
 # Classes used for security camera
 from file_manager import File_Manager
 from webcam import Webcam
+from uploader import Uploader
 
 #Config data
 from config import config
+
 
 def print_log(text_to_log):
     """
@@ -24,50 +26,24 @@ def print_log(text_to_log):
     f.close()
 
 
-def dropbox_upload(file):
-    """
-    Try to upload file to dropbox, return true if successful, otherwise false
-    """
-    #try:
-    dropbox_auth_token = config["dropbox_key"]
-    client = dropbox.client.DropboxClient(dropbox_auth_token)
-    f = open(config["offline_images_directory"] + "/" + file, 'rb')
-    response = client.put_file('/' + file, f)
-    return True
-    #except MaxRetryError:
-    #    print("FAILURE!")
-    #    return False
-
-
-
-def is_connected():
-    """
-    Check if there is an internet connection
-    """
-    try:
-        host = socket.gethostbyname("www.google.com")
-        s = socket.create_connection((host, 80), 2)
-        return True
-    except:
-        pass
-    return False
-
-
 def upload_files():
     """
     Tries to upload each file in queue
     """
     while True:
-        print("size: {}".format(file_manager.size))
-        print("is_connected: {}".format(is_connected()))
-        if file_manager.size > 0 and is_connected():
-            success = dropbox_upload(file_manager.get_next())
-            print("success: {}".format(success))
+        if uploader.is_connected_to_ssh() is False:
+            uploader.connect_to_ssh()
+            print("uploader is connected: {}".format(uploader.is_connected_to_ssh()))
+
+        if file_manager.size > 0 and uploader.is_connected_to_internet():
+            file_origin = config["offline_images_directory"] + "/" + file_manager.get_next()
+            file_destination = file_manager.get_next()
+
+            success = uploader.upload_to_ssh(file_origin, file_destination)
             if success:
                 print_log("{} -- File upload success: {}".format(datetime.datetime.now(),file_manager.get_next()))
                 file_manager.dequeue()
         time.sleep(1)
-                
 
 
 def capture_photos():
@@ -115,8 +91,6 @@ def setup_dirs(*pathes):
     
 
 if __name__ == "__main__":
-    
-    
     offline_dir = config["offline_images_directory"]
     online_dir = config["online_images_directory"]
     test_dir = config["test_images_directory"]
@@ -125,6 +99,9 @@ if __name__ == "__main__":
         
     file_manager = File_Manager(offline_dir, online_dir)
     webcam = Webcam(offline_dir,test_dir)
+    uploader = Uploader(config["ssh_host"],
+                        config["ssh_username"],
+                        config["ssh_password"])
     
     Thread(target = capture_photos).start()
     Thread(target = upload_files).start()
