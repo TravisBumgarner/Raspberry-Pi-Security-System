@@ -36,19 +36,3 @@ def get_images(start, end, sort_order):
         return reversed(image_list)
 
 
-def generate_thumbnails():
-    # images_path = os.path.abspath('./app/security_photos')
-    images_path = os.path.join(os.path.expanduser('~'), 'webapps', 'chs_photo_storage')
-    # thumbnails_path = os.path.abspath('./app/security_photos/thumbs')
-    thumbnails_path = os.path.join(os.path.expanduser('~'), 'webapps', 'chs_photo_storage','thumbs')
-    while True:
-        images_set = set([f for f in os.listdir(images_path) if os.path.isfile(os.path.join(images_path, f))])
-        thumbnails_set = set(os.listdir(thumbnails_path))
-        new_images = images_set - thumbnails_set
-
-        for image in new_images:
-            im = Image.open(os.path.join(images_path, image))
-            size = 200, 200
-            im.thumbnail(size)
-            im.save(os.path.join(thumbnails_path, image))
-        time.sleep(10)
