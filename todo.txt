@@ -1,8 +1,8 @@
 Issues
 
 Not Started:
-    1. Delay for bad login attempts
-    2. Setup https://letsencrypt.org/  
+
+    2. Setup https://letsencrypt.org/  (Or use flask-httpauth)
     3. Set max image size on Picamera
     4. Add thumbnail Functionality
     5. Preselect images by radio button. 
@@ -12,6 +12,7 @@ Not Started:
 
 In Progress
     1. Get Feedback from CHS
+    2. Delay for bad login attempts
 
 Completed
     1. Learn about OpenID and alternatives - Part III of the Tutorial and SA Forums

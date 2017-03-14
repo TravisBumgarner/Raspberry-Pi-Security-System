@@ -5,7 +5,7 @@ from .forms import LoginForm, RegistrationForm, ImageFilterForm #Imports form fr
 from .functions import get_images
 from .models import User, User_Request
 from . import db
-
+from app import limiter
 
 import datetime
 import os
@@ -38,12 +38,14 @@ def web_viewer():
 
 
 @app.route('/protected/<path:filename>')
+@limiter.exempt
 @login_required
 def protected(filename):
     return send_from_directory('./security_photos', filename)
 
 
 @app.route('/register', methods = ['GET','POST'])
+@limiter.limit("5 per hour")
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
@@ -61,6 +63,7 @@ def register():
 
 
 @app.route('/login', methods = ['GET','POST'])
+@limiter.limit("10 per hour")
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -84,7 +87,6 @@ def login():
             db.session.add(user_request)
             db.session.commit()
             login_user(user, remember= False)
-            flash(current_user.id)
             return redirect(url_for('web_viewer'))   
     return render_template('login.html', form=form)
 
