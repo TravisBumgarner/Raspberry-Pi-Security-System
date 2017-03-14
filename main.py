@@ -1,10 +1,7 @@
 import time
 import datetime
-
 from subprocess import call
-
 from threading import Thread
-import dropbox
 import os
 
 # Classes used for security camera
@@ -39,7 +36,12 @@ def upload_files():
             file_origin = config["offline_images_directory"] + "/" + file_manager.get_next()
             file_destination = file_manager.get_next()
 
-            success = uploader.upload_to_ssh(file_origin, file_destination)
+            if config["ssh_or_dropbox"] == "ssh":
+                success = uploader.upload_to_ssh(file_origin, file_destination)
+            elif config["ssh_or_dropbox"] == "dropbox":
+                success = uploader.upload_to_dropbox(file_origin)
+            else:
+                raise ValueError('Select either "ssh" or "dropbox" from config.py setting "ssh_or_dropbox"')
             if success:
                 print_log("{} -- File upload success: {}".format(datetime.datetime.now(),file_manager.get_next()))
                 file_manager.dequeue()
@@ -86,6 +88,8 @@ def purge_old_files(images_folder, purge_age):
 
 def setup_dirs(*pathes):
     for path in pathes:
+        if type(path) is not str:
+            raise TypeError("{} is not a valid folder path, check config.py.".format(path))
         if not os.path.exists(path):
             os.makedirs(path)
     
@@ -101,7 +105,8 @@ if __name__ == "__main__":
     webcam = Webcam(offline_dir,test_dir)
     uploader = Uploader(config["ssh_host"],
                         config["ssh_username"],
-                        config["ssh_password"])
+                        config["ssh_password"],
+                        config["dropbox_key"])
     
     Thread(target = capture_photos).start()
     Thread(target = upload_files).start()

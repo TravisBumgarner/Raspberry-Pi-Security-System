@@ -2,13 +2,17 @@
 import time
 import paramiko
 import socket
+import dropbox
+
 
 class Uploader:
-    def __init__(self, ssh_host, ssh_username, ssh_password):
+    def __init__(self, ssh_host=None, ssh_username=None, ssh_password=None, dropbox_key=None):
         self.ssh_host = ssh_host
         self.ssh_username = ssh_username
         self.ssh_password = ssh_password
-        self.ssh = paramiko.SSHClient()
+        if self.ssh_host is not None:
+            self.ssh = paramiko.SSHClient()
+        self.dropbox_key = dropbox_key
 
     def is_connected_to_internet(self):
         """
@@ -48,12 +52,15 @@ class Uploader:
         sftp.close()
         return True
 
-    def upload_to_dropbox(self):
+    def upload_to_dropbox(self, file):
         """
         Try to upload file to dropbox, return true if successful, otherwise false
         """
-        dropbox_auth_token = config["dropbox_key"]
-        client = dropbox.client.DropboxClient(dropbox_auth_token)
-        f = open(file, 'rb')
-        response = client.put_file('/' + file, f)
-        return True
+        try:
+            client = dropbox.client.DropboxClient(self.dropbox_key)
+            f = open(file, 'rb')
+            response = client.put_file('/' + file, f)
+            return True
+        except dropbox.rest.ErrorResponse:
+            raise RuntimeError("Check Dropbox installation instructions in readme.txt.")
+            return False
