@@ -1,15 +1,17 @@
-Left off Point
-
 Issues
-    2. How to upload images
 
 Not Started:
-    8. Delay for bad login attempts
+    1. Delay for bad login attempts
+    2. Setup https://letsencrypt.org/  
+    3. Set max image size on Picamera
+    4. Add thumbnail Functionality
+    5. Preselect images by radio button. 
+    6. Create some sort of JSON structure for showing images.
+   
+    
 
 In Progress
-    1. How to only let admin view admin panel
-    4. Move to Webfaction
-
+    1. Get Feedback from CHS
 
 Completed
     1. Learn about OpenID and alternatives - Part III of the Tutorial and SA Forums
@@ -24,7 +26,10 @@ Completed
     10. Filter images descending/accending
     11. How to password protect /admin
     12. Login for reason Admin does not permit access to photos
-
+    13. How to upload images
+    14. How to only let admin view admin panel
+    15. Move to Webfaction  
+    
 Canceled
     1. Email verfication and template (Used file_access = False instead)
     2. Look into HTTPS
