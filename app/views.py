@@ -37,6 +37,14 @@ def web_viewer():
                            gallery=gallery)
 
 
+@app.route('/protected/thumbs/<path:filename>')
+@limiter.exempt
+@login_required
+def protected_thumbs(filename):
+    path =  os.path.join(os.path.expanduser('~'), 'webapps', 'chs_photo_storage','thumbs')
+    return send_from_directory(path, filename)
+
+
 @app.route('/protected/<path:filename>')
 @limiter.exempt
 @login_required

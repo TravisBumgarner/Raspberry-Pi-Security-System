@@ -3,21 +3,26 @@
 
 {% block content %}
 <div class="col-xs-8 col-xs-offset-2">
-
-  <form action="" method="post" name="login">
-        {{ form.hidden_tag() }}
-                {% for error in form.end_date.errors %}<span style="color: red;">[Start Date: {{ error }}]</span><br>{% endfor %}{% for error in form.start_date.errors %}<span style="color: red;">[End Date: {{ error }}]</span><br>{% endfor %}{% for error in form.sort_order.errors %}<span style="color: red;">[Sort Order: {{ error }}]</span><br>{% endfor %}
-              {{ form.start_date(type='date', width=50) }} to {{ form.end_date(type='date', width=50) }} {{form.sort_order}}<br>
-                <input type="submit" value="Filter"> (Leave empty to get all images)
-
-    </form>
-
-    {% for image in gallery %}
-        <b>{{image}}</b>
-            <img data-original="{{ url_for('protected', filename = image) }}" width="640" height="480">
-        <br>
-
-    {% endfor %}
+    <div class="row">
+        <div class= "col-xs-12">
+            <form action="" method="post" name="login">
+                {{ form.hidden_tag() }}
+                        {% for error in form.end_date.errors %}<span style="color: red;">[Start Date: {{ error }}]</span><br>{% endfor %}{% for error in form.start_date.errors %}<span style="color: red;">[End Date: {{ error }}]</span><br>{% endfor %}{% for error in form.sort_order.errors %}<span style="color: red;">[Sort Order: {{ error }}]</span><br>{% endfor %}
+                      {{ form.start_date(type='date', width=50) }} to {{ form.end_date(type='date', width=50) }} {{form.sort_order}}<br>
+                        <input type="submit" value="Filter"> (Leave empty to get all images)
+            </form>        
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        {% for image in gallery %}
+            <div class = "col-sm-4 col-xs-6">
+                <a class="thumbnail" href="{{ url_for('protected', filename = image) }}" data-toggle="lightbox" data-gallery="example-gallery">
+                    <b>{{image}}</b>
+                    <img data-original="{{ url_for('protected_thumbs', filename = image) }}" alt="..." class="img-fluid">
+                </a>
+            </div>
+        {% endfor %}
+    </div>
 </div>
-
 {% endblock %}

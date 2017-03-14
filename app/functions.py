@@ -1,7 +1,8 @@
 import os
 import datetime
-from PIL import Image
+from PIL import Image, ImageFile
 import time
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 def get_images(start, end, sort_order):
     # Sort order is either "old_to_new" or "new_to_old"
@@ -24,7 +25,8 @@ def get_images(start, end, sort_order):
 
     image_list = []
 
-    for image_file in os.listdir(path):
+    for image_file in [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]:
+    	#Get each image file, exclude directory
         image_file_date = datetime.datetime.strptime(image_file[:-4], "%Y-%m-%d-%H-%M-%S")
         if (image_file_date > start_datetime) and (image_file_date < end_datetime):
             image_list.append(image_file)
