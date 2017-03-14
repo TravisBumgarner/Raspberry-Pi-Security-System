@@ -35,7 +35,9 @@ def get_images(start, end, sort_order):
 
 
 def generate_thumbnails():
+    # images_path = os.path.abspath('./app/security_photos')
     images_path = os.path.join(os.path.expanduser('~'), 'webapps', 'chs_photo_storage')
+    # thumbnails_path = os.path.abspath('./app/security_photos/thumbs')
     thumbnails_path = os.path.join(os.path.expanduser('~'), 'webapps', 'chs_photo_storage','thumbs')
     while True:
         images_set = set([f for f in os.listdir(images_path) if os.path.isfile(os.path.join(images_path, f))])
