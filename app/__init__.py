@@ -4,8 +4,6 @@ from flask_login import LoginManager
 from flask_admin import Admin
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-from threading import Thread
-from .functions import generate_thumbnails
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -28,9 +26,6 @@ limiter = Limiter(
     key_func=get_remote_address,
     global_limits=["200 per day", "50 per hour"]
 )
-
-# Thumbnails
-Thread(target = generate_thumbnails).start()
 
 from app import views, models, admin_panel
 
