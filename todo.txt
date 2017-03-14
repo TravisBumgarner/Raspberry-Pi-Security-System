@@ -1,17 +1,17 @@
 Issues
 
 Not Started:
+    1. Add actual Content to Admin Page
     2. Setup https://letsencrypt.org/  (Or use flask-httpauth)
     3. Set max image size on Picamera
-    4. Add thumbnail Functionality
-
     6. Create some sort of JSON structure for showing images.
     7. WTForms Secret Key
+
     
 
 In Progress
     1. Get Feedback from CHS
-
+    4. Add thumbnail Functionality
 
 Completed
     1. Learn about OpenID and alternatives - Part III of the Tutorial and SA Forums
