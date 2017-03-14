@@ -40,7 +40,8 @@ def web_viewer():
 @app.route('/protected/<path:filename>')
 @login_required
 def protected(filename):
-    return send_from_directory('./security_photos', filename)
+    path =  os.path.join(os.path.expanduser('~'), 'webapps', 'chs_photo_storage')
+    return send_from_directory(path, filename)
 
 
 @app.route('/register', methods = ['GET','POST'])
@@ -84,7 +85,6 @@ def login():
             db.session.add(user_request)
             db.session.commit()
             login_user(user, remember= False)
-            flash(current_user.id)
             return redirect(url_for('web_viewer'))   
     return render_template('login.html', form=form)
 
