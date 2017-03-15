@@ -1,8 +1,11 @@
-
 #!/usr/bin/env python
 # The shepang above makes the script executeable
 # chmod +x functions_cron_jobs.py
 # Add this file to crontab -e
+import os
+from PIL import Image, ImageFile
+import time
+
 def generate_thumbnails():
     # images_path = os.path.abspath('./app/security_photos')
     images_path = os.path.join(os.path.expanduser('~'), 'webapps', 'chs_photo_storage')
