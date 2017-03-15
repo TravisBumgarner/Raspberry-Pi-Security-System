@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # The shepang above makes the script executeable
 # chmod +x functions_cron_jobs.py
 # Add this file to crontab -e
@@ -26,6 +26,6 @@ def generate_thumbnails():
 if __name__ == "__main__":
     #Since cron jobs only run in units of minutes or greater, we'll call this function 6 times, once per 10 seconds. 6*10 = 1 minute.
     # */1 * * * * ~/webapps/chs_web_viewer/web_viewer/app/functions_cron_jobs.py
-    for i in range(0,7):
+    for i in range(0,61):
         generate_thumbnails()
-        time.sleep(10)
+        time.sleep(1)
