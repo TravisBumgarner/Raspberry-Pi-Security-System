@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/local/bin/python3.5
 # The shepang above makes the script executeable
 # chmod +x functions_cron_jobs.py
 # Add this file to crontab -e
