@@ -1,19 +1,20 @@
 @import url('https://fonts.googleapis.com/css?family=Merriweather:300,300i,900');
 body{
 	font-size: medium;
+	font-family: 'Merriweather', serif;
+	font-weight: 300;
 }
 body{
 	min-height: 100vh;
 	background-color: #26cfd1;
 }
 
-
-/* Logged Out Nav */
-nav.signedout ul{
+/* Both signedin and signedout Nav */
+nav ul{
     list-style-type: none;
     padding-left: 0px;
 }
-nav.signedout li{
+nav li{
     background-color: #cdeafc;
     color: #055283;
     cursor: pointer;
@@ -21,13 +22,18 @@ nav.signedout li{
     font-family: 'Merriweather', serif;
     font-size: 1.2em;
     font-weight: 300;
-    padding: 5px 10px;
     text-align: center;
+}
+nav li.active{
+	font-weight: 900;
+}
+
+/* Logged Out Nav */
+
+nav.signedout li{
     width: 44%;
     margin: 0px;
-}
-nav.signedout li.active{
-	font-weight: 900;
+    padding: 5px 10px;
 }
 nav.signedout li:first-child{
 	margin-left: 4%;
@@ -80,30 +86,41 @@ ul.flashes > li{
 	color: #01f559;
 }
 
-/* Nav Main
-.container{
-    margin-top: 50px;
+/* Logged In Nav */
+nav.signedin li{
+    width: 20%;
+    margin: 0px 2%;
+    padding: 5px 0px;
+}
+nav.signedin li.active{
+	font-weight: 900;
+}
+.browse-container{
+	background-color:#055283;
+	margin-top: 10vh;
+}
+nav.signedin li:first-child{
+	margin-left: 4%;
+}
+nav.signedin li:last-child{
+	margin-right: 4%;
 }
 
-img{
-    margin: 0px 0px 25px 0px;
-}
+/* Logged In Forms */
 
-#user_name {
-    padding: 10px 15px;
-}
-
-ul#sort_order{
+#start_date, #end_date, #sort_order, #filter{
+    background: None;
+    color: #cdeafc;
+    border: 0px;
+    border-bottom: 2px solid white;
+    border-radius: 0px;
     display: inline;
-    margin: 0px;
+    font-size: 14px;
+    height: 22px;
     padding: 0px;
-
-
+    margin: 0px;
 }
-
-ul#sort_order li{
-    display: inline;
-    padding: 0px 0px 0px 10px;
-
+#start_date, #end_date, #sort_order, #filter{
+    width: 23%;
+    margin: 0.5%;
 }
-*/

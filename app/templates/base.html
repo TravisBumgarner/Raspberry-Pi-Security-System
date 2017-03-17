@@ -4,65 +4,102 @@
     <meta charset="UTF-8">
     <title>Web Viewer</title>
     <!-- CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.1.1/ekko-lightbox.min.css" />
     <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
     <!-- JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.1.1/ekko-lightbox.js"></script>
+    <script type="text/javascript" src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
+    </script>
 </head>
 <body>
 
+
+
 <div class="container">
     <div class="row">
-        <div class="col-xs-8 col-xs-offset-2">
-            <ul class="nav nav-pills">
+        <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+            <div class="login-container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <nav class = "signedout" class="">
+                            <ul class="">
+                                <li role="presentation"><a href="{{ url_for('web_viewer') }}">Web Viewer</a></li>
+                                <li role="presentation"><a href="{{ url_for('logout') }}">Logout</a></li>
+                                {% if current_user.admin_access %}
+                                <li role="presentation"><a href="{{ url_for('admin.index') }}">Admin</a></li>
+                                {% endif %}
+                                <li id = "user_name">User: {{ current_user.name }}</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="row">
+                     <div class="col-xs-12">
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                <ul class=flashes>
+                                {% for message in messages %}
+                                  <li>{{ message }}</li>
+                                {% endfor %}
+                                </ul>
+                            {% endif %}
+                        {% endwith %}
+                        <div> hererher
 
-                {% if current_user.is_authenticated %}
-                    <li role="presentation"><a href="{{ url_for('web_viewer') }}">Web Viewer</a></li>
-                    <li role="presentation"><a href="{{ url_for('logout') }}">Logout</a></li>
-                    {% if current_user.admin_access %}
-                    <li role="presentation"><a href="{{ url_for('admin.index') }}">Admin</a></li>
-                    {% endif %}
-                    <li id = "user_name">User: {{ current_user.name }}</li>
-                {% endif %}
-            </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-8 col-xs-offset-2">
-            <hr>
-            {% with messages = get_flashed_messages() %}
-              {% if messages %}
-                <ul class=flashes>
-                {% for message in messages %}
-                  <li>{{ message }}</li>
-                {% endfor %}
-                </ul>
-                <hr>
-              {% endif %}
-            {% endwith %}
-        </div>
-    </div>
-
-    {% block content %}
-    {% endblock %}
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- JavaScript -->
     <script src = "/static/js/lazyload.js" ></script>
     <script>
-        var myLazyLoad = new LazyLoad({
-            threshold: 500,
-            throttle: 200
-        });
+    var myLazyLoad = new LazyLoad({
+        threshold: 500,
+        throttle: 200
+    });
 
     </script>
+
     <script type="text/javascript">
     $(document).on('click', '[data-toggle="lightbox"]', function(event) {
         event.preventDefault();
         $(this).ekkoLightbox();
+    });
+    </script>
+
+    <script type="text/javascript">
+    $(function() {
+        $('#start-datetime').datetimepicker({
+            language: 'en',
+            pick12HourFormat: true
+        });
+        $('#end-datetime').datetimepicker({
+            language: 'en',
+            pick12HourFormat: true
+        });
     });
     </script>
 </body>

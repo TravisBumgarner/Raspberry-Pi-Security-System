@@ -19,7 +19,7 @@ class AdminModelView(sqla.ModelView):
 
     def inaccessible_callback(self, name, **kwargs):
         # redirect to login page if user doesn't have access
-        return redirect(url_for('login'))
+        return redirect(url_for('index'))
 
 
 admin.add_view(AdminModelView(User, db.session))

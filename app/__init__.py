@@ -14,7 +14,7 @@ db = SQLAlchemy(app)
 # Flask_Login
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
-login_manager.login_view = 'login'
+login_manager.login_view = 'index'
 login_manager.init_app(app)
 
 # Flask_Admin

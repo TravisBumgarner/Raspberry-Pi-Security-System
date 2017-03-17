@@ -3,13 +3,13 @@ from wtforms import SubmitField, StringField, SelectField, TextAreaField, Passwo
 from wtforms.validators import DataRequired, Email, Length, Regexp, EqualTo, Optional
 from .models import User
 
-
 class ImageFilterForm(Form):
     start_date = DateField('Start date', validators=[Optional()])
     end_date = DateField('End date', validators=[Optional()])
-    sort_order = RadioField('Sort Order',
+    sort_order = SelectField('Sort Order',
                             choices =[('old_to_new','Old to New'),('new_to_old','New to Old')],
                             default = 'new_to_old')
+    filter = SubmitField('filter')
 
 class LoginForm(Form):
     email = StringField('Email', validators=[DataRequired(),

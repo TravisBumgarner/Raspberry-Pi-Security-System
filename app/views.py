@@ -12,7 +12,7 @@ import os
 
 
 @app.route('/', methods = ['GET','POST'])
-@limiter.limit("1000 per hour")
+@limiter.limit("10 per hour")
 def index():
     login_form = LoginForm()
     registration_form = RegistrationForm()
@@ -53,7 +53,7 @@ def index():
 
     return render_template('index.html', login_form=login_form, registration_form=registration_form)
 
-
+@limiter.limit("100 per hour")
 @app.route('/web_viewer', methods = ['GET','POST'])
 @login_required
 def web_viewer():
@@ -79,7 +79,8 @@ def web_viewer():
 @limiter.exempt
 @login_required
 def protected(filename):
-    path =  os.path.join(os.path.expanduser('~'), 'webapps', 'chs_photo_storage')
+    #path = os.path.join(os.path.expanduser('~'), 'webapps', 'chs_photo_storage')
+    path = os.path.abspath('./app/security_photos')
     return send_from_directory(path, filename)
 
 
@@ -87,7 +88,8 @@ def protected(filename):
 @limiter.exempt
 @login_required
 def protected_thumbs(filename):
-    path =  os.path.join(os.path.expanduser('~'), 'webapps', 'chs_photo_storage','thumbs')
+    #path = os.path.join(os.path.expanduser('~'), 'webapps', 'chs_photo_storage','thumbs')
+    path = os.path.abspath('./app/security_photos/thumbs')
     return send_from_directory(path, filename)
 
 
