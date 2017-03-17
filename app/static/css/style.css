@@ -1,4 +1,86 @@
-/* Nav Main */
+@import url('https://fonts.googleapis.com/css?family=Merriweather:300,300i,900');
+body{
+	font-size: medium;
+}
+body{
+	min-height: 100vh;
+	background-color: #26cfd1;
+}
+
+
+/* Logged Out Nav */
+nav.signedout ul{
+    list-style-type: none;
+    padding-left: 0px;
+}
+nav.signedout li{
+    background-color: #cdeafc;
+    color: #055283;
+    cursor: pointer;
+    float: left;
+    font-family: 'Merriweather', serif;
+    font-size: 1.2em;
+    font-weight: 300;
+    padding: 5px 10px;
+    text-align: center;
+    width: 44%;
+    margin: 0px;
+}
+nav.signedout li.active{
+	font-weight: 900;
+}
+nav.signedout li:first-child{
+	margin-left: 4%;
+	margin-right: 2%;
+}
+nav.signedout li:last-child{
+	margin-left: 2%;
+	margin-right: 4%;
+}
+.login-container{
+	background-color:#055283;
+	margin-top: 10vh;	
+}
+
+/* Logged Out Forms */
+form[name=login] p,
+form[name=login] p span,
+form[name=register] p{
+	color: #cdeafc;
+	margin: 2% 4%;
+	width: 92%;
+}
+
+form[name=login] p > *:not(span),
+form[name=register] p > *:not(span)
+ {
+	width: 100%;
+	background-color: #cdeafc;
+}
+
+form[name=login] *,
+form[name=register] *{
+	color: #055283;
+	border: 0px;
+}
+
+.hidden{
+	display:none;
+}
+
+/* Flashes */
+ul.flashes{
+    list-style-type: none;
+    margin: 2% 4%;
+    padding: 5px 0px 5px 0px;	
+    width: 92%;
+}
+
+ul.flashes > li{
+	color: #01f559;
+}
+
+/* Nav Main
 .container{
     margin-top: 50px;
 }
@@ -24,3 +106,4 @@ ul#sort_order li{
     padding: 0px 0px 0px 10px;
 
 }
+*/

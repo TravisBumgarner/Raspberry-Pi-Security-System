@@ -20,16 +20,12 @@
             <ul class="nav nav-pills">
 
                 {% if current_user.is_authenticated %}
-                    <li role="presentation"><a href="/web_viewer">Web Viewer</a></li>
-                    <li role="presentation"><a href="/logout">Logout</a></li>
+                    <li role="presentation"><a href="{{ url_for('web_viewer') }}">Web Viewer</a></li>
+                    <li role="presentation"><a href="{{ url_for('logout') }}">Logout</a></li>
                     {% if current_user.admin_access %}
-                    <li role="presentation"><a href="/admin">Admin</a></li>
+                    <li role="presentation"><a href="{{ url_for('admin.index') }}">Admin</a></li>
                     {% endif %}
                     <li id = "user_name">User: {{ current_user.name }}</li>
-                {% else %}
-                    <li role="presentation"><a href="/index">Index</a></li>
-                    <li role="presentation"><a href="/login">Login</a></li>
-                    <li role="presentation"><a href="/register">Register</a></li>
                 {% endif %}
             </ul>
         </div>

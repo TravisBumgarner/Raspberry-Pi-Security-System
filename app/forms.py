@@ -1,5 +1,5 @@
 from flask_wtf import Form
-from wtforms import StringField, SelectField, TextAreaField, PasswordField, DateField, RadioField, ValidationError
+from wtforms import SubmitField, StringField, SelectField, TextAreaField, PasswordField, DateField, RadioField, ValidationError
 from wtforms.validators import DataRequired, Email, Length, Regexp, EqualTo, Optional
 from .models import User
 
@@ -26,6 +26,7 @@ class LoginForm(Form):
                                  )
     visit_description = TextAreaField('visit_description', validators=[DataRequired(),
                                                                        Length(min=25)])
+    login = SubmitField('Login')
 
 
 class RegistrationForm(Form):
@@ -39,6 +40,7 @@ class RegistrationForm(Form):
     password = PasswordField('Password', validators=[DataRequired(),
                                                      EqualTo('password2', message="Passwords do not match.")])
     password2 = PasswordField('Confirm Password', validators= [DataRequired()])
+    register = SubmitField('Register')
 
     def validate_email(self, field):
         if User.query.filter_by(email=field.data).first():
