@@ -1,10 +1,11 @@
 #!/usr/local/bin/python3.5
-# The shepang above makes the script executeable
+# The shebang above makes the script executeable
 # chmod +x functions_cron_jobs.py
 # Add this file to crontab -e
 import os
 from PIL import Image, ImageFile
 import time
+
 
 def generate_thumbnails():
     # images_path = os.path.abspath('./app/security_photos')
@@ -18,7 +19,7 @@ def generate_thumbnails():
 
     for image in new_images:
         im = Image.open(os.path.join(images_path, image))
-        size = 200, 200
+        size = 300, 300
         im.thumbnail(size)
         im.save(os.path.join(thumbnails_path, image))
 
