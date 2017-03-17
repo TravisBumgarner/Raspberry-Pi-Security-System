@@ -35,7 +35,7 @@ def upload_files():
         if file_manager.size > 0 and uploader.is_connected_to_internet():
             file_origin = config["offline_images_directory"] + "/" + file_manager.get_next()
             file_destination = file_manager.get_next()
-
+            
             if config["ssh_or_dropbox"] == "ssh":
                 success = uploader.upload_to_ssh(file_origin, file_destination)
             elif config["ssh_or_dropbox"] == "dropbox":

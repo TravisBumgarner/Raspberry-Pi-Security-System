@@ -3,7 +3,7 @@ import time
 import paramiko
 import socket
 import dropbox
-
+import datetime
 
 class Uploader:
     def __init__(self, ssh_host=None, ssh_username=None, ssh_password=None, dropbox_key=None):
@@ -48,8 +48,17 @@ class Uploader:
 
     def upload_to_ssh(self, file_origin, file_destination ):
         sftp = self.ssh.open_sftp()
-        sftp.put(file_origin,file_destination)
-        sftp.close()
+        destination_data = datetime.datetime.strptime(file_destination[:-4], "%Y-%m-%d-%H-%M-%S")
+        date = destination_data.strftime("%Y-%m-%d")
+        hour = destination_data.strftime("%H")
+        path = date + "/" + hour + "/"
+        print(path + file_destination)
+        try:
+            sftp.put(file_origin, path + file_destination)
+        except IOError:
+            sftp.mkdir(date)
+            sftp.mkdir(path)
+            sftp.put(file_origin, path + file_destination)    
         return True
 
     def upload_to_dropbox(self, file):
