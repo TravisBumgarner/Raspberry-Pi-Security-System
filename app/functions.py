@@ -8,19 +8,19 @@ def get_images(start, end):
     if end is None:
         end_datetime = datetime.datetime.now()
     else:
-        end_datetime = datetime.datetime(end.year, end.month, end.day)
+        end_datetime = datetime.datetime(end.year, end.month, end.day, 23, 59)
 
     if start is None:
         delta = datetime.timedelta(days = 3650)
         start_datetime = end_datetime - delta
     else:
-        start_datetime = datetime.datetime(start.year, start.month, start.day)
+        start_datetime = datetime.datetime(start.year, start.month, start.day, 0, 0)
 
     image_request = {}
     for dirName, subdir, fileList in os.walk(photos_root_dir):
         for fname in fileList:
             image_file_date = datetime.datetime.strptime(fname[:-4], "%Y-%m-%d-%H-%M-%S")
-            if (image_file_date > start_datetime) and (image_file_date < end_datetime):
+            if (image_file_date >= start_datetime) and (image_file_date <= end_datetime):
                 _, hour = os.path.split(dirName)
                 _, date = os.path.split(_)
                 rel_path = fname          
