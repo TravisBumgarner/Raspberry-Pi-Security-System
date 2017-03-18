@@ -17,7 +17,6 @@ nav ul{
 nav li{
     background-color: #cdeafc;
     color: #055283;
-    cursor: pointer;
     float: left;
     font-family: 'Merriweather', serif;
     font-size: 1.2em;
@@ -34,6 +33,7 @@ nav.signedout li{
     width: 44%;
     margin: 0px;
     padding: 5px 10px;
+    cursor: pointer;
 }
 nav.signedout li:first-child{
 	margin-left: 4%;
@@ -75,6 +75,9 @@ form[name=register] *{
 }
 
 /* Flashes */
+.blue-bg{
+    background-color:#055283;
+}
 ul.flashes{
     list-style-type: none;
     margin: 2% 4%;
@@ -85,19 +88,20 @@ ul.flashes{
 ul.flashes > li{
 	color: #01f559;
 }
-
+nav.signedin{
+    margin-top: 10vh;
+    overflow: auto;
+}
 /* Logged In Nav */
+
+
 nav.signedin li{
-    width: 20%;
-    margin: 0px 2%;
+    width: 28%;
+    margin: 2% 2%;
     padding: 5px 0px;
 }
 nav.signedin li.active{
 	font-weight: 900;
-}
-.browse-container{
-	background-color:#055283;
-	margin-top: 10vh;
 }
 nav.signedin li:first-child{
 	margin-left: 4%;
@@ -107,12 +111,24 @@ nav.signedin li:last-child{
 }
 
 /* Logged In Forms */
+.small-text{
+    font-size: 0.6em;
+}
+
+.margin-top{
+    margin-top:10px;
+}
+
+form[name=search]{
+    color: #cdeafc;
+    padding: 5px 40px;
+}
 
 #start_date, #end_date, #sort_order, #filter{
     background: None;
     color: #cdeafc;
     border: 0px;
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid #cdeafc;
     border-radius: 0px;
     display: inline;
     font-size: 14px;
@@ -123,4 +139,16 @@ nav.signedin li:last-child{
 #start_date, #end_date, #sort_order, #filter{
     width: 23%;
     margin: 0.5%;
+}
+#filter{
+    border: 2px solid #cdeafc;
+}
+
+/* Logged In Images */
+h2.image-date{
+    padding: 10px 0px 10px 4%;
+    color: #cdeafc;
+}
+.gallery-img{
+    margin-bottom: 15px;
 }
