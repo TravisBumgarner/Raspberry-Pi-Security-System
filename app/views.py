@@ -58,7 +58,7 @@ def index():
 @app.route('/web_viewer', methods = ['GET','POST'])
 @login_required
 def web_viewer():
-    gallery = []
+    gallery = {}
     form = ImageFilterForm()
     if form.validate_on_submit():
         # Get the reason for why the current user is visiting by looking at the form data from the last time they logged in.
@@ -66,10 +66,10 @@ def web_viewer():
         if current_user.file_access is True and current_user_request != "admin":
             gallery = get_images(form.start_date.data,form.end_date.data) #insert date range into get_images function
         elif(current_user_request == "admin"):
-            gallery = []
+            gallery = {}
             flash('Admin access does not permit photo viewing. Please logout and try again.')
         elif(current_user.file_access is False):
-            gallery = []
+            gallery = {}
             flash('Account activation is required.')
     return render_template('web_viewer.html',
                            form=form,
