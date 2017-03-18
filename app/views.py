@@ -16,7 +16,8 @@ import os
 def index():
     login_form = LoginForm()
     registration_form = RegistrationForm()
-
+    registration_flag = False
+    
     if login_form.login.data and login_form.validate_on_submit():
         user = User.query.filter_by(email=login_form.email.data).first()
         if user is None or user.verify_password(login_form.password.data) is False:
@@ -40,6 +41,9 @@ def index():
             login_user(user, remember= False)
             return redirect(url_for('web_viewer'))
 
+    if registration_form.register.data:
+        registration_flag = True;
+
     if registration_form.register.data and registration_form.validate_on_submit():
         user = User(name=registration_form.name.data,
                     email=registration_form.email.data,
@@ -51,7 +55,10 @@ def index():
         flash('You will be notified when your account has been approved.')
         return redirect(url_for('index'))
 
-    return render_template('index.html', login_form=login_form, registration_form=registration_form)
+    return render_template('index.html', 
+        login_form=login_form, 
+        registration_form=registration_form,
+        registration_flag = registration_flag)
 
 
 @limiter.limit("100 per hour")

@@ -37,7 +37,7 @@
                                 </ul>
                             {% endif %}
                         {% endwith %}
-                        <form action="" method="post" name="login">
+                        <form action="" method="post" name="login" class = "{% 'hidden' if registration_flag %}">
                             {{ login_form.hidden_tag() }}
                             <p>
                               Email: {% for error in login_form.email.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}<br>
@@ -59,7 +59,7 @@
                               {{ login_form.login }}
                             </p>
                         </form>
-                        <form action="" method="post" name="register" class = "hidden">
+                        <form action="" method="post" name="register" class = "{% 'hidden' if not registration_flag %}">
                             {{ registration_form.hidden_tag() }}
                             <p>
                               Name (Format: First.Last):<br>
