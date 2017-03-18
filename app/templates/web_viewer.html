@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <title>Web Viewer</title>
     <!-- CSS -->
-    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.1.1/ekko-lightbox.min.css" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.min.css" />
     <link rel="stylesheet" href="/static/css/style.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
     <!-- JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.1.1/ekko-lightbox.js"></script>
-    <script type="text/javascript" src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
+
+
+
+
+
     </script>
 </head>
 <body>
@@ -51,51 +53,28 @@
                             {{ form.hidden_tag() }}
                         {% for error in form.end_date.errors %}<span style="color: red;">[Start Date: {{ error }}]</span><br>{% endfor %}{% for error in form.start_date.errors %}<span style="color: red;">[End Date: {{ error }}]</span><br>{% endfor %}{{ form.start_date(type='date', width=50) }} to {{ form.end_date(type='date', width=50) }} {{ form.filter }}<br>
                             (Leave empty to get all images)
-                            </p>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
-<div class="row">
-    {% for date, hours in gallery.items() %}
-        <br>
-        {% for hour, files in hours.items() %}
-        <h2>{{ date }} -- {{ hour }}</h2><br>
-            {% for file in files %}
-                {{ file }}
-                <img src="{{ url_for('protected', image_date = date, image_hour = hour, file_name = file) }}" width=350 height=200><br>
+    <div class="row">
+        {% for date, hours in gallery.items() %}
+            {% for hour, files in hours.items() %}
+            <div class="row">
+                <h2>{{ date }} -- {{ hour }}</h2><br>
+                    {% for file in files %}
+                        <div class="col-xs-6 col-sm-4 col-md-3">
+                        <a href="{{ url_for('protected', image_date = date, image_hour = hour, file_name = file) }}" data-fancybox="gallery" data-caption=="{{ file }}"></a>
+                            <img class="lazy" data-original="{{ url_for('protected', image_date = date, image_hour = hour, file_name = file) }}" width=350 height=200>
+                        </div>
+                    {% endfor %}
+            </div>
             {% endfor %}
         {% endfor %}
-    {% endfor %}
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!-- JavaScript -->
 <script src = "/static/js/lazyload.js" ></script>
@@ -107,12 +86,6 @@ var myLazyLoad = new LazyLoad({
 
 </script>
 
-<script type="text/javascript">
-$(document).on('click', '[data-toggle="lightbox"]', function(event) {
-    event.preventDefault();
-    $(this).ekkoLightbox();
-});
-</script>
 
 <script type="text/javascript">
 $(function() {
