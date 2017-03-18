@@ -53,6 +53,7 @@ def index():
 
     return render_template('index.html', login_form=login_form, registration_form=registration_form)
 
+
 @limiter.limit("100 per hour")
 @app.route('/web_viewer', methods = ['GET','POST'])
 @login_required
@@ -63,7 +64,7 @@ def web_viewer():
         # Get the reason for why the current user is visiting by looking at the form data from the last time they logged in.
         current_user_request = User_Request.query.filter_by(user_id=current_user.id).order_by('date desc').limit(1)[0].visit_select
         if current_user.file_access is True and current_user_request != "admin":
-            gallery = get_images("./app/security_photos", form.start_date.data,form.end_date.data, form.sort_order.data) #insert date range into get_images function
+            gallery = get_images(form.start_date.data,form.end_date.data) #insert date range into get_images function
         elif(current_user_request == "admin"):
             gallery = []
             flash('Admin access does not permit photo viewing. Please logout and try again.')
@@ -75,22 +76,20 @@ def web_viewer():
                            gallery=gallery)
 
 
-@app.route('/protected/<path:filename>')
+@app.route('/protected/<image_date>/<image_hour>/<file_name>')
 @limiter.exempt
 @login_required
-def protected(filename):
-    path = os.path.join(os.path.expanduser('~'), 'webapps', 'chs_photo_storage')
-    #path = os.path.abspath('./app/security_photos')
-    return send_from_directory(path, filename)
+def protected(image_date, image_hour, file_name):
+    path = os.path.join(os.path.expanduser('~'),'webapps','chs_photo_storage', image_date, image_hour)
+    return send_from_directory(path, file_name)
 
 
-@app.route('/protected/thumbs/<path:filename>')
+@app.route('/protected/thumbs/<image_date>/<image_hour>/<file_name>')
 @limiter.exempt
 @login_required
-def protected_thumbs(filename):
-    path = os.path.join(os.path.expanduser('~'), 'webapps', 'chs_photo_storage','thumbs')
-    #path = os.path.abspath('./app/security_photos/thumbs')
-    return send_from_directory(path, filename)
+def protected_thumbs(image_date, image_hour, file_name):
+    path = os.path.join(os.path.expanduser('~'),'webapps','chs_photo_storage', 'thumbs', image_date, image_hour)
+    return send_from_directory(path, file_name)
 
 
 @app.route('/logout')

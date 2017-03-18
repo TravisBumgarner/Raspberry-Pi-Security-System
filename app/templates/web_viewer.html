@@ -49,8 +49,7 @@
                         {% endwith %}
                         <form action="" method="post" name="search">
                             {{ form.hidden_tag() }}
-                        {% for error in form.end_date.errors %}<span style="color: red;">[Start Date: {{ error }}]</span><br>{% endfor %}{% for error in form.start_date.errors %}<span style="color: red;">[End Date: {{ error }}]</span><br>{% endfor %}{% for error in form.sort_order.errors %}<span style="color: red;">[Sort Order: {{ error }}]</span><br>{% endfor %}
-                      {{ form.start_date(type='date', width=50) }} to {{ form.end_date(type='date', width=50) }} {{form.sort_order(size=1)}}{{ form.filter }}<br>
+                        {% for error in form.end_date.errors %}<span style="color: red;">[Start Date: {{ error }}]</span><br>{% endfor %}{% for error in form.start_date.errors %}<span style="color: red;">[End Date: {{ error }}]</span><br>{% endfor %}{{ form.start_date(type='date', width=50) }} to {{ form.end_date(type='date', width=50) }} {{ form.filter }}<br>
                             (Leave empty to get all images)
                             </p>
                         </form>
@@ -59,19 +58,20 @@
             </div>
         </div>
     </div>
+    
     <div class="row">
-        {% for image in gallery %}
-            <div class = "col-sm-4 col-xs-6">
-                <a class="thumbnail" href="{{ url_for('protected', filename = image) }}" data-toggle="lightbox" data-gallery="example-gallery">
-                    <b>{{image}}</b>
-                    <img data-original="{{ url_for('protected_thumbs', filename = image) }}" alt="..." class="img-fluid">
-                </a>
-            </div>
+{% for date, hours in gallery.items() %}
+    <br>
+    {% for hour, files in hours.items() %}
+    <h2>{{ date }} -- {{ hour }}</h2><br>
+        {% for file in files %}
+            {{ file }}
+            <img src="{{ url_for('protected', image_date = date, image_hour = hour, file_name = file) }}" width=350 height=200><br>
         {% endfor %}
+    {% endfor %}
+{% endfor %}
     </div>
 </div>
-
-
 
 
 

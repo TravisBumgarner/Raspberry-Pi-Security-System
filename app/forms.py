@@ -6,9 +6,6 @@ from .models import User
 class ImageFilterForm(Form):
     start_date = DateField('Start date', validators=[Optional()])
     end_date = DateField('End date', validators=[Optional()])
-    sort_order = SelectField('Sort Order',
-                            choices =[('old_to_new','Old to New'),('new_to_old','New to Old')],
-                            default = 'new_to_old')
     filter = SubmitField('filter')
 
 class LoginForm(Form):

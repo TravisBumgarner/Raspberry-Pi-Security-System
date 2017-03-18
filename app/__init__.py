@@ -30,4 +30,4 @@ limiter = Limiter(
 from app import views, models, admin_panel
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
