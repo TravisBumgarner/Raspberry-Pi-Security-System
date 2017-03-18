@@ -20,8 +20,8 @@
                     <div class="col-xs-12">
                         <nav class = "signedout" class="">
                             <ul class="">
-                                <li class="active" data-form-toggle="login">Login</li>
-                                <li data-form-toggle = "register">Register</a></li>
+                                <li {% if not registration_flag %} class="active" {% endif %} data-form-toggle="login">Login</li>
+                                <li {% if registration_flag %} class="active" {% endif %} data-form-toggle = "register">Register</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -37,45 +37,45 @@
                                 </ul>
                             {% endif %}
                         {% endwith %}
-                        <form action="" method="post" name="login" class = "{% 'hidden' if registration_flag %}">
+                        <form action="" method="post" name="login"  {% if registration_flag %} class = "hidden" {% endif %}>
                             {{ login_form.hidden_tag() }}
                             <p>
-                              Email: {% for error in login_form.email.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}<br>
+                              Email: {% for error in login_form.email.errors %}<span class = "errors">[{{ error }}]</span>{% endfor %}<br>
                               {{ login_form.email(size=30) }}<br>
                             </p>
                             <p>
-                              Password: {% for error in login_form.password.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}<br>
+                              Password: {% for error in login_form.password.errors %}<span class = "errors">[{{ error }}]</span>{% endfor %}<br>
                               {{ login_form.password(size=30) }}<br>
                             </p>
-                            <p>Reason for visit: {% for error in login_form.visit_select.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}<br>
+                            <p>Reason for visit: {% for error in login_form.visit_select.errors %}<span class = "errors">[{{ error }}]</span>{% endfor %}<br>
                                 {{ login_form.visit_select }}<br>
                             </p>
 
                             <p>
-                                Description: <span id="char_required">(25 Char Required)</span> {% for error in login_form.visit_description.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}<br>
+                                Description: <span id="char_required">(25 Char Required)</span> {% for error in login_form.visit_description.errors %}<span class = "errors">[{{ error }}]</span>{% endfor %}<br>
                               {{ login_form.visit_description(cols = 30, rows = 5) }}<br>
                             </p>
                             <p>
                               {{ login_form.login }}
                             </p>
                         </form>
-                        <form action="" method="post" name="register" class = "{% 'hidden' if not registration_flag %}">
+                        <form action="" method="post" name="register" {% if not registration_flag %} class = "hidden" {% endif %}>
                             {{ registration_form.hidden_tag() }}
                             <p>
                               Name (Format: First.Last):<br>
-                              {{ registration_form.name(size=30) }}{% for error in registration_form.name.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}<br>
+                              {{ registration_form.name(size=30) }}{% for error in registration_form.name.errors %}<span class = "errors">[{{ error }}]</span>{% endfor %}<br>
                             </p>
                             <p>Email Address:<br>
-                                {{ registration_form.email(size=30) }}{% for error in registration_form.email.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}<br>
+                                {{ registration_form.email(size=30) }}{% for error in registration_form.email.errors %}<span class = "errors">[{{ error }}]</span>{% endfor %}<br>
                             </p>
 
                             <p>
                               Password:<br>
-                              {{ registration_form.password(size=30) }}{% for error in registration_form.password.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}<br>
+                              {{ registration_form.password(size=30) }}{% for error in registration_form.password.errors %}<span class = "errors">[{{ error }}]</span>{% endfor %}<br>
                             </p>
                             <p>
                               Rewrite Password:<br>
-                              {{ registration_form.password2(size=30) }}{% for error in registration_form.password2.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}<br>
+                              {{ registration_form.password2(size=30) }}{% for error in registration_form.password2.errors %}<span class = "errors">[{{ error }}]</span>{% endfor %}<br>
                             </p>
                             <p>
                               {{ registration_form.register }}

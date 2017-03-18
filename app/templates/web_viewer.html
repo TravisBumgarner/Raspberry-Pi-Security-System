@@ -47,7 +47,7 @@
 
                         <form action="" method="post" name="search">
                             {{ form.hidden_tag() }}
-                        {% for error in form.end_date.errors %}<span style="color: red;">[Start Date: {{ error }}]</span><br>{% endfor %}{% for error in form.start_date.errors %}<span style="color: red;">[End Date: {{ error }}]</span><br>{% endfor %}{{ form.start_date(type='date', width=50) }} to {{ form.end_date(type='date', width=50) }} {{ form.filter }}
+                        {% for error in form.end_date.errors %}<span class="errors">[Start Date: {{ error }}]</span><br>{% endfor %}{% for error in form.start_date.errors %}<span class="errors">[End Date: {{ error }}]</span><br>{% endfor %}{{ form.start_date(type='date', width=50) }} to {{ form.end_date(type='date', width=50) }} {{ form.filter }}
                             <span class="small-text">(Leave empty to get all images)</span>
                         </form>
                     </div>

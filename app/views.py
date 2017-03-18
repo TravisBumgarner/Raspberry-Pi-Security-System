@@ -12,7 +12,7 @@ import os
 
 
 @app.route('/', methods = ['GET','POST'])
-@limiter.limit("10 per hour")
+@limiter.limit("2012 per hour")
 def index():
     login_form = LoginForm()
     registration_form = RegistrationForm()
