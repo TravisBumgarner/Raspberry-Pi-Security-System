@@ -1,15 +1,17 @@
-from PIL import ImageChops, Image
+from PIL import ImageChops, Image, ImageFile
 from picamera import PiCamera
 import datetime
 import math
 import time
 
+
 class Webcam():
-    def __init__(self, images_directory,test_images_directory):
+    def __init__(self, images_directory,test_images_directory, offline_thumbnails_directory):
         self.camera = PiCamera()
         self.image = None
         self.images_directory = images_directory
         self.test_images_directory = test_images_directory
+        self.offline_thumbnails_directory = offline_thumbnails_directory
 
     def image_entropy(self,img):
         """Calculate the entropy of an image"""
@@ -20,7 +22,6 @@ class Webcam():
 
     def take_photo(self, filename):
         self.camera.capture(self.images_directory + "/" + filename)
-
 
     def wait(self,seconds):
         for i in range(1, seconds + 1):
@@ -43,3 +44,9 @@ class Webcam():
         img2 = Image.open(self.test_image2)
         diff = ImageChops.difference(img1, img2)
         return True if (self.image_entropy(diff) > 5) else False
+
+    def generate_thumbnail(self, filename):
+        im = Image.open(self.images_directory + "/" + filename)
+        size = 300, 300
+        im.thumbnail(size)
+        im.save(self.offline_thumbnails_directory + "/" + filename)

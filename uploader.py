@@ -4,6 +4,24 @@ import paramiko
 import socket
 import dropbox
 import datetime
+import os
+import sys
+
+def splitall(path):
+    allparts = []
+    while 1:
+        parts = os.path.split(path)
+        if parts[0] == path:  # sentinel for absolute paths
+            allparts.insert(0, parts[0])
+            break
+        elif parts[1] == path: # sentinel for relative paths
+            allparts.insert(0, parts[1])
+            break
+        else:
+            path = parts[0]
+            allparts.insert(0, parts[1])
+    return allparts
+
 
 class Uploader:
     def __init__(self, ssh_host=None, ssh_username=None, ssh_password=None, dropbox_key=None):
@@ -48,17 +66,28 @@ class Uploader:
 
     def upload_to_ssh(self, file_origin, file_destination ):
         sftp = self.ssh.open_sftp()
-        destination_data = datetime.datetime.strptime(file_destination[:-4], "%Y-%m-%d-%H-%M-%S")
-        date = destination_data.strftime("%Y-%m-%d")
-        hour = destination_data.strftime("%H")
+        _, filename = os.path.split(file_origin)
+        file_data = datetime.datetime.strptime(filename[:-4], "%Y-%m-%d-%H-%M-%S")
+        date = file_data.strftime("%Y-%m-%d")
+        hour = file_data.strftime("%H")
         path = date + "/" + hour + "/"
-        print(path + file_destination)
+        print(file_destination + path + filename)
+        # This whole mess is because mkdir returns an error if the dir exists
+        if file_destination is not "":
+            try:
+                sftp.mkdir(file_destination)
+            except IOError:
+                pass
         try:
-            sftp.put(file_origin, path + file_destination)
+            sftp.put(file_origin, file_destination + path + filename)
         except IOError:
-            sftp.mkdir(date)
-            sftp.mkdir(path)
-            sftp.put(file_origin, path + file_destination)    
+            try:
+                sftp.mkdir(file_destination + date)
+            except IOError:
+                try:
+                    sftp.mkdir(file_destination + path)
+                except:
+                    sftp.put(file_origin, file_destination + path + filename)   
         return True
 
     def upload_to_dropbox(self, file):

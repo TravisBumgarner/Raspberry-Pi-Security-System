@@ -33,13 +33,18 @@ def upload_files():
             print("uploader is connected: {}".format(uploader.is_connected_to_ssh()))
 
         if file_manager.size > 0 and uploader.is_connected_to_internet():
-            file_origin = config["offline_images_directory"] + "/" + file_manager.get_next()
-            file_destination = file_manager.get_next()
+            full_file_origin = config["offline_images_directory"] + "/" + file_manager.get_next()
+            full_file_destination = ""
+
+            thumb_file_origin = config["offline_thumbnails_directory"] + "/" + file_manager.get_next()
+            thumb_file_destination = "thumbs/"
             
             if config["ssh_or_dropbox"] == "ssh":
-                success = uploader.upload_to_ssh(file_origin, file_destination)
+                success1 = uploader.upload_to_ssh(full_file_origin, full_file_destination)
+                success2 = uploader.upload_to_ssh(thumb_file_origin, thumb_file_destination)
+                success = success1 and success2
             elif config["ssh_or_dropbox"] == "dropbox":
-                success = uploader.upload_to_dropbox(file_origin)
+                success = uploader.upload_to_dropbox(full_file_origin)
             else:
                 raise ValueError('Select either "ssh" or "dropbox" from config.py setting "ssh_or_dropbox"')
             if success:
@@ -59,6 +64,7 @@ def capture_photos():
             for i in range(0,config["qty_of_photos"]):
                 filename = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S") + ".jpg"
                 webcam.take_photo(filename)
+                webcam.generate_thumbnail(filename)
                 file_manager.enqueue(filename)
                 time.sleep(config["interval"])
             webcam.wait(config["delay_time"])
@@ -97,12 +103,21 @@ def setup_dirs(*pathes):
 if __name__ == "__main__":
     offline_dir = config["offline_images_directory"]
     online_dir = config["online_images_directory"]
+
+    offline_thumbnails_dir = config["offline_thumbnails_directory"]
+    online_thumbnails_dir = config["online_thumbnails_directory"]
+                                          
     test_dir = config["test_images_directory"]
+                                          
     purge_age = config["purge_age"]
-    setup_dirs(offline_dir,online_dir,test_dir)
+    setup_dirs(offline_dir,
+               online_dir,
+               test_dir,
+               offline_thumbnails_dir,
+               online_thumbnails_dir)
         
     file_manager = File_Manager(offline_dir, online_dir)
-    webcam = Webcam(offline_dir,test_dir)
+    webcam = Webcam(offline_dir,test_dir, offline_thumbnails_dir)
     uploader = Uploader(config["ssh_host"],
                         config["ssh_username"],
                         config["ssh_password"],
