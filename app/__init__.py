@@ -18,7 +18,9 @@ login_manager.login_view = 'index'
 login_manager.init_app(app)
 
 # Flask_Admin
-admin = Admin(app)
+#admin = Admin(app)
+
+
 
 # Flask Limiter
 limiter = Limiter(

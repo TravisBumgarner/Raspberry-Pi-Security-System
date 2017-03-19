@@ -1,10 +1,28 @@
-from app import db, admin
+from app import db
 from flask_admin.contrib import sqla
 from flask import redirect, url_for, flash
 import flask_login
-from app.models import User, User_Request
 from flask_admin.contrib.sqla import ModelView
+from flask_admin import Admin, AdminIndexView, expose
+from app import app
+from .models import User, User_Request
 
+class MyHomeView(AdminIndexView):
+    @expose('/')
+    def index(self):
+        last_request = User_Request.query.order_by(User_Request.date.desc()).limit(1).all()[0]
+        total_issues = len(User_Request.query.all())
+        last_login_user = User.query.filter_by(id = last_request.user_id).limit(1).all()[0].name
+        last_login_date = last_request.date
+        last_login_reason = last_request.visit_description
+
+        return self.render('admin/index.html',
+                           total_issues = len(User_Request.query.all()),
+                           last_login_user = last_login_user,
+                           last_login_date = last_login_date,
+                           last_login_reason = last_login_reason)
+
+admin = Admin(app, index_view=MyHomeView())
 
 
 class AdminModelView(sqla.ModelView):
@@ -22,5 +40,7 @@ class AdminModelView(sqla.ModelView):
         return redirect(url_for('index'))
 
 
+
 admin.add_view(AdminModelView(User, db.session))
 admin.add_view(AdminModelView(User_Request, db.session))
+

@@ -105,3 +105,10 @@ def logout():
     logout_user()
     flash('You have been logged out.')
     return redirect(url_for('index'))
+
+
+from flask_admin import BaseView, expose
+class MyView(BaseView):
+    @expose('/a')
+    def index(self):
+        return 'Hello World!'
