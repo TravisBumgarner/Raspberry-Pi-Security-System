@@ -3,3 +3,4 @@ wv_venv/
 __pycache__/
 *.jpg
 app.db
+config.py
