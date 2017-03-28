@@ -122,11 +122,13 @@ if __name__ == "__main__":
                         config["ssh_username"],
                         config["ssh_password"],
                         config["dropbox_key"])
+    try:
+        Thread(target = capture_photos).start()
+        Thread(target = upload_files).start()
+        Thread(target = purge_old_files, args = (offline_dir,purge_age)).start()
+    except Exception as e:
+        print_log("{} -- Script Error: {}".format(datetime.datetime.now(),e))
     
-    Thread(target = capture_photos).start()
-    Thread(target = upload_files).start()
-    Thread(target = purge_old_files, args = (offline_dir,purge_age)).start()
-
 
    
                     

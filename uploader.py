@@ -71,7 +71,7 @@ class Uploader:
         date = file_data.strftime("%Y-%m-%d")
         hour = file_data.strftime("%H")
         path = date + "/" + hour + "/"
-        print(file_destination + path + filename)
+        print("Uploading to :" + file_destination + path + filename)
         # This whole mess is because mkdir returns an error if the dir exists
         if file_destination is not "":
             try:

@@ -12,7 +12,7 @@ Hardware Requirements
     1. Raspberry Pi camera
 
 Raspberry Pi Setup
-    1. Place "webcam_launcher.sh" in "/usr/local/bin" so that script restarts if power goes out.
+    1. Add webcam_launcher.sh to crontab so that the script runs on reboot.
     	(Optional - Disable vncserver line if vnc is not used) 
     2. Review settings in config.py (See Dropbox setup and Paramiko setup below)
     3. Run "sudo raspi-config" -> Interfacing Options -> Camera -> Enable.
