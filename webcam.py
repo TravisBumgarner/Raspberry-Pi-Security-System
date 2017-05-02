@@ -43,6 +43,7 @@ class Webcam():
         img1 = Image.open(self.test_image1)
         img2 = Image.open(self.test_image2)
         diff = ImageChops.difference(img1, img2)
+        print(self.image_entropy(diff))
         return True if (self.image_entropy(diff) > 5) else False
 
     def generate_thumbnail(self, filename):
