@@ -20,8 +20,7 @@ class File_Manager():
         if self.size != 0:
             self.last_pop = self.queue.pop()
             f_src = os.path.abspath(self.offline_directory) + "/" + self.last_pop
-            f_des = os.path.abspath(self.online_directory) + "/" + self.last_pop
-            os.rename(f_src, f_des)
+            os.remove(f_src)
             self.size -= 1
 
     def get_next(self):

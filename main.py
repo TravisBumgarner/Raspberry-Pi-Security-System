@@ -28,29 +28,32 @@ def upload_files():
     Tries to upload each file in queue
     """
     while True:
-        if uploader.is_connected_to_ssh() is False:
-            uploader.connect_to_ssh()
-            print("uploader is connected: {}".format(uploader.is_connected_to_ssh()))
+        try:
+            if uploader.is_connected_to_ssh() is False:
+                uploader.connect_to_ssh()
+                print_log("{} -- Internet Status: {}".format(datetime.datetime.now(),uploader.is_connected_to_ssh()))
 
-        if file_manager.size > 0 and uploader.is_connected_to_internet():
-            full_file_origin = config["offline_images_directory"] + "/" + file_manager.get_next()
-            full_file_destination = ""
+            if file_manager.size > 0 and uploader.is_connected_to_internet():
+                full_file_origin = config["offline_images_directory"] + "/" + file_manager.get_next()
+                full_file_destination = ""
 
-            thumb_file_origin = config["offline_thumbnails_directory"] + "/" + file_manager.get_next()
-            thumb_file_destination = "thumbs/"
-            
-            if config["ssh_or_dropbox"] == "ssh":
-                success1 = uploader.upload_to_ssh(full_file_origin, full_file_destination)
-                success2 = uploader.upload_to_ssh(thumb_file_origin, thumb_file_destination)
-                success = success1 and success2
-            elif config["ssh_or_dropbox"] == "dropbox":
-                success = uploader.upload_to_dropbox(full_file_origin)
-            else:
-                raise ValueError('Select either "ssh" or "dropbox" from config.py setting "ssh_or_dropbox"')
-            if success:
-                print_log("{} -- File upload success: {}".format(datetime.datetime.now(),file_manager.get_next()))
-                file_manager.dequeue()
-        time.sleep(1)
+                thumb_file_origin = config["offline_thumbnails_directory"] + "/" + file_manager.get_next()
+                thumb_file_destination = "thumbs/"
+                
+                if config["ssh_or_dropbox"] == "ssh":
+                    success1 = uploader.upload_to_ssh(full_file_origin, full_file_destination)
+                    success2 = uploader.upload_to_ssh(thumb_file_origin, thumb_file_destination)
+                    success = success1 and success2
+                elif config["ssh_or_dropbox"] == "dropbox":
+                    success = uploader.upload_to_dropbox(full_file_origin)
+                else:
+                    raise ValueError('Select either "ssh" or "dropbox" from config.py setting "ssh_or_dropbox"')
+                if success:
+                    print_log("{} -- File upload success: {}".format(datetime.datetime.now(),file_manager.get_next()))
+                    file_manager.dequeue()
+            time.sleep(1)
+        except Exception as e:
+            print_log("{} -- Script Error: {}".format(datetime.datetime.now(),e))
 
 
 def capture_photos():
@@ -59,37 +62,19 @@ def capture_photos():
     detection.
     """
     while True:
-        if webcam.detect_motion() is True:
-            print_log("{} -- Motion detected".format(datetime.datetime.now()))
-            for i in range(0,config["qty_of_photos"]):
-                filename = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S") + ".jpg"
-                webcam.take_photo(filename)
-                webcam.generate_thumbnail(filename)
-                file_manager.enqueue(filename)
-                time.sleep(config["interval"])
-            webcam.wait(config["delay_time"])
-        else:      
-            print_log("{} -- No motion detected".format(datetime.datetime.now()))
+        try:
+            if webcam.detect_motion() is True:
+                print_log("{} -- Motion detected".format(datetime.datetime.now()))
+                for i in range(0,config["qty_of_photos"]):
+                    filename = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S") + ".jpg"
+                    webcam.take_photo(filename)
+                    webcam.generate_thumbnail(filename)
+                    file_manager.enqueue(filename)
+                    time.sleep(config["interval"])
+                webcam.wait(config["delay_time"])
 
-
-def purge_old_files(images_folder, purge_age):
-    """
-    Any file older than (now - purge_age) will be deleted
-    :param images_folder: Directory of files to be checked
-    :param purge_age: Measured in days
-    :return:
-    """
-    now = datetime.datetime.now()
-    delta = datetime.timedelta(days = purge_age)
-    cutoff_date = now - delta
-
-    list_of_image_files = [f for f in os.listdir(images_folder) if os.path.isfile(os.path.join(images_folder, f))]
-    for image_file in list_of_image_files:
-        image_file_date = datetime.datetime.strptime(image_file[:-4], "%Y-%m-%d-%H-%M-%S")
-        if cutoff_date > image_file_date:
-            print_log("{} -- Deleting {}".format(datetime.datetime.now(),image_file))
-            os.remove(images_folder + "/" + image_file)
-    time.sleep(60*60*24)
+        except Exception as e:
+            print_log("{} -- Script Error: {}".format(datetime.datetime.now(),e))
 
 
 def setup_dirs(*pathes):
@@ -122,12 +107,10 @@ if __name__ == "__main__":
                         config["ssh_username"],
                         config["ssh_password"],
                         config["dropbox_key"])
-    try:
-        Thread(target = capture_photos).start()
-        Thread(target = upload_files).start()
-        Thread(target = purge_old_files, args = (offline_dir,purge_age)).start()
-    except Exception as e:
-        print_log("{} -- Script Error: {}".format(datetime.datetime.now(),e))
+
+    Thread(target = capture_photos).start()
+    Thread(target = upload_files).start()
+
     
 
    
