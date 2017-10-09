@@ -1,0 +1,38 @@
+VNC(R) Server 6.0.2 (r26367) ARMv6 (Mar 6 2017 16:56:52)
+Copyright (C) 2002-2017 RealVNC Ltd.
+RealVNC and VNC are trademarks of RealVNC Ltd and are protected by trademark
+registrations and/or pending trademark applications in the European Union,
+United States of America and other jurisdictions.
+Protected by UK patent 2481870; US patent 8760366; EU patent 2652951.
+See https://www.realvnc.com for information on VNC.
+For third party acknowledgements see:
+https://www.realvnc.com/docs/6.0/foss.html
+
+If a desktop environment fails to load for this virtual desktop, please see:
+ https://www.realvnc.com/doclink/kb-345
+Running applications in /etc/vnc/xstartup
+
+VNC Server catchphrase: "Archer Colombo polka. Brush poetic flower."
+             signature: 90-67-73-eb-2f-9a-56-2c
+
+Log file is /root/.vnc/travbum:1.log
+New desktop is travbum:1 ([2603:3005:b0b:ba00::8a22]:1)
+mmal: mmal_vc_port_enable: failed to enable port vc.null_sink:in:0(OPQV): ENOSPC
+mmal: mmal_port_enable: failed to enable connected port (vc.null_sink:in:0(OPQV))0x27e5d20 (ENOSPC)
+mmal: mmal_connection_enable: output port couldn't be enabled
+Traceback (most recent call last):
+  File "main.py", line 104, in <module>
+    webcam = Webcam(offline_dir,test_dir, offline_thumbnails_dir)
+  File "/home/pi/Desktop/webcam/webcam.py", line 10, in __init__
+    self.camera = PiCamera()
+  File "/usr/lib/python3/dist-packages/picamera/camera.py", line 433, in __init__
+    self._init_preview()
+  File "/usr/lib/python3/dist-packages/picamera/camera.py", line 513, in _init_preview
+    self, self._camera.outputs[self.CAMERA_PREVIEW_PORT])
+  File "/usr/lib/python3/dist-packages/picamera/renderers.py", line 558, in __init__
+    self.renderer.inputs[0].connect(source).enable()
+  File "/usr/lib/python3/dist-packages/picamera/mmalobj.py", line 2212, in enable
+    prefix="Failed to enable connection")
+  File "/usr/lib/python3/dist-packages/picamera/exc.py", line 184, in mmal_check
+    raise PiCameraMMALError(status, prefix)
+picamera.exc.PiCameraMMALError: Failed to enable connection: Out of resources

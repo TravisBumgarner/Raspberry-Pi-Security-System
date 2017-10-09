@@ -1,9 +1,8 @@
 import os
 
 class File_Manager():
-    def __init__(self,offline_directory,online_directory):
+    def __init__(self,offline_directory):
         self.offline_directory = offline_directory
-        self.online_directory = online_directory
         offline_file_list = [f for f in os.listdir(offline_directory) if os.path.isfile(os.path.join(offline_directory, f))]
         self.queue = offline_file_list
         self.last_pop = None

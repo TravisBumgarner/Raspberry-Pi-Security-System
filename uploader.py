@@ -52,12 +52,14 @@ class Uploader:
     
     def connect_to_ssh(self):
         try:
+            self.ssh = paramiko.SSHClient()
             self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
             self.ssh.connect(self.ssh_host,
                              username = self.ssh_username,
                              password = self.ssh_password,
                              timeout = 5.0)
             time.sleep(6)
+            return None
         except (TimeoutError, paramiko.ssh_exception.AuthenticationException):
             return "Check login credentials and/or internet connection."
 

@@ -30,9 +30,12 @@ def upload_files():
     while True:
         try:
             if uploader.is_connected_to_ssh() is False:
-                uploader.connect_to_ssh()
+                errorMsg = uploader.connect_to_ssh()
+                if errorMsg is not None: print_log("{} -- Script Error: {}".format(datetime.datetime.now(),errorMsg))
                 print_log("{} -- Internet Status: {}".format(datetime.datetime.now(),uploader.is_connected_to_ssh()))
-
+                time.sleep(60)
+                continue
+                
             if file_manager.size > 0 and uploader.is_connected_to_internet():
                 full_file_origin = config["offline_images_directory"] + "/" + file_manager.get_next()
                 full_file_destination = ""
@@ -87,21 +90,17 @@ def setup_dirs(*pathes):
 
 if __name__ == "__main__":
     offline_dir = config["offline_images_directory"]
-    online_dir = config["online_images_directory"]
-
     offline_thumbnails_dir = config["offline_thumbnails_directory"]
-    online_thumbnails_dir = config["online_thumbnails_directory"]
-                                          
+
     test_dir = config["test_images_directory"]
                                           
     purge_age = config["purge_age"]
     setup_dirs(offline_dir,
-               online_dir,
                test_dir,
-               offline_thumbnails_dir,
-               online_thumbnails_dir)
+               offline_thumbnails_dir
+               )
         
-    file_manager = File_Manager(offline_dir, online_dir)
+    file_manager = File_Manager(offline_dir)
     webcam = Webcam(offline_dir,test_dir, offline_thumbnails_dir)
     uploader = Uploader(config["ssh_host"],
                         config["ssh_username"],
