@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css?family=Merriweather:300,300i,900');
+body{
+	font-size: medium;
+	font-family: 'Merriweather', serif;
+	font-weight: 300;
+}
+body{
+	min-height: 100vh;
+	background-color: #efefef;
+}
+
+
+/* Both signedin and signedout Nav */
+nav ul{
+    list-style-type: none;
+    padding-left: 0px;
+}
+nav li{
+    background-color: #cdeafc;
+    color: #055283;
+    float: left;
+    font-family: 'Merriweather', serif;
+    font-size: 1.2em;
+    font-weight: 300;
+    text-align: center;
+}
+nav li.active{
+	font-weight: 900;
+}
+
+/* Logged Out Nav */
+
+nav.signedout li{
+    border-bottom: 2px solid #cdeafc;
+    background-color: #055283;
+    color: #cdeafc;
+    width: 44%;
+    margin: 0px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+nav.signedout li:first-child{
+	margin-left: 4%;
+	margin-right: 2%;
+}
+nav.signedout li:last-child{
+	margin-left: 2%;
+	margin-right: 4%;
+}
+.login-container{
+	background-color:#055283;
+	margin-top: 10vh;	
+}
+
+/* Logged Out Forms */
+form[name=login] p,
+form[name=login] p span,
+form[name=register] p{
+	color: #cdeafc;
+	margin: 2% 4%;
+	width: 92%;
+}
+form[name=login] p span{
+    margin: 0px;
+}
+form[name=login] p > *:not(span),
+form[name=register] p > *:not(span)
+ {
+	width: 100%;
+	background-color: #cdeafc;
+}
+
+form[name=login] *,
+form[name=register] *{
+	color: #055283;
+	border: 0px;
+}
+
+.hidden{
+	display:none;
+}
+
+/* Flashes */
+.blue-bg{
+    background-color:#055283;
+}
+ul.flashes{
+    list-style-type: none;
+    margin: 2% 4%;
+    padding: 5px 0px 5px 0px;	
+    width: 92%;
+}
+
+ul.flashes > li{
+	color: #01f559;
+}
+nav.signedin{
+    margin-top: 10vh;
+    overflow: auto;
+}
+/* Logged In Nav */
+
+
+nav.signedin li{
+    width: 28%;
+    margin: 2% 2%;
+    padding: 5px 0px;
+}
+nav.signedin li.active{
+	font-weight: 900;
+}
+nav.signedin li:first-child{
+	margin-left: 4%;
+}
+nav.signedin li:last-child{
+	margin-right: 4%;
+}
+
+/* Logged In Forms */
+.small-text{
+    font-size: 0.6em;
+}
+
+.margin-top{
+    margin-top:10px;
+}
+
+form[name=search]{
+    color: #cdeafc;
+    padding: 5px 40px;
+}
+
+#start_date, #end_date, #sort_order, #filter{
+    background: None;
+    color: #cdeafc;
+    border: 0px;
+    border-bottom: 2px solid #cdeafc;
+    border-radius: 0px;
+    display: inline;
+    font-size: 14px;
+    height: 22px;
+    padding: 0px;
+    margin: 0px;
+}
+#start_date, #end_date, #sort_order, #filter{
+    width: 23%;
+    margin: 0.5%;
+}
+#filter{
+    border: 2px solid #cdeafc;
+}
+
+/* Logged In Images */
+h2.image-date{
+    padding: 10px 0px 10px 4%;
+    color: #cdeafc;
+}
+.gallery-img{
+    margin-bottom: 15px;
+}
+
+/* Errors */
+.errors{
+	color: #01f559 !important;
+}

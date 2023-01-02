@@ -1,0 +1,43 @@
+Issues
+
+Not Started:
+    1. Add actual Content to Admin Page
+    2. Setup https://letsencrypt.org/  (Or use flask-httpauth)
+    3. Set max image size on Picamera
+    4. Deal with better way to store images - perhaps by hour of day
+    5. Deal with better way to load images on to page - some enhanced lazy loading
+    7. WTForms Secret Key
+
+    
+
+In Progress
+    1. Get Feedback from CHS
+    4. Add thumbnail Functionality
+
+Completed
+    1. Learn about OpenID and alternatives - Part III of the Tutorial and SA Forums
+    2. Finish models
+    3. Figure out why DB won't create password_hash column
+    4. Lazy load images
+    5. Figure out auth.login issue - SA Forums
+    6. Add url_for() for all links (pg 32)
+    7. Put all static content behind a block
+    8. Best way to let users access content - Add auth email that only goes to me. - Woo admin Panel!
+    9. Figure out security of images
+    10. Filter images descending/accending
+    11. How to password protect /admin
+    12. Login for reason Admin does not permit access to photos
+    13. How to upload images
+    14. How to only let admin view admin panel
+    15. Move to Webfaction  
+    16. Delay for bad login attempts
+    17. Preselect images by radio button.
+
+Canceled
+    1. Email verfication and template (Used file_access = False instead)
+    2. Look into HTTPS
+
+Later
+    1. Build website with sqlite first and then update with mySQL
+    3. Password protect rasppi
+    5. Configure secret key (pg 38)

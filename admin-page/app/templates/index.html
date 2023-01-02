@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Web Viewer</title>
+    <!-- CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+            <div class="login-container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <nav class = "signedout" class="">
+                            <ul class="">
+                                <li {% if not registration_flag %} class="active" {% endif %} data-form-toggle="login">Login</li>
+                                <li {% if registration_flag %} class="active" {% endif %} data-form-toggle = "register">Register</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="row">
+                     <div class="col-xs-12">
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                <ul class=flashes>
+                                {% for message in messages %}
+                                  <li>{{ message }}</li>
+                                {% endfor %}
+                                </ul>
+                            {% endif %}
+                        {% endwith %}
+                        <form action="" method="post" name="login"  {% if registration_flag %} class = "hidden" {% endif %}>
+                            {{ login_form.hidden_tag() }}
+                            <p>
+                              Email: {% for error in login_form.email.errors %}<span class = "errors">[{{ error }}]</span>{% endfor %}<br>
+                              {{ login_form.email(size=30) }}<br>
+                            </p>
+                            <p>
+                              Password: {% for error in login_form.password.errors %}<span class = "errors">[{{ error }}]</span>{% endfor %}<br>
+                              {{ login_form.password(size=30) }}<br>
+                            </p>
+                            <p>Reason for visit: {% for error in login_form.visit_select.errors %}<span class = "errors">[{{ error }}]</span>{% endfor %}<br>
+                                {{ login_form.visit_select }}<br>
+                            </p>
+
+                            <p>
+                                Description: <span id="char_required">(25 Char Required)</span> {% for error in login_form.visit_description.errors %}<span class = "errors">[{{ error }}]</span>{% endfor %}<br>
+                              {{ login_form.visit_description(cols = 30, rows = 5) }}<br>
+                            </p>
+                            <p>
+                              {{ login_form.login }}
+                            </p>
+                        </form>
+                        <form action="" method="post" name="register" {% if not registration_flag %} class = "hidden" {% endif %}>
+                            {{ registration_form.hidden_tag() }}
+                            <p>
+                              Name (Format: First.Last):<br>
+                              {{ registration_form.name(size=30) }}{% for error in registration_form.name.errors %}<span class = "errors">[{{ error }}]</span>{% endfor %}<br>
+                            </p>
+                            <p>Email Address:<br>
+                                {{ registration_form.email(size=30) }}{% for error in registration_form.email.errors %}<span class = "errors">[{{ error }}]</span>{% endfor %}<br>
+                            </p>
+
+                            <p>
+                              Password:<br>
+                              {{ registration_form.password(size=30) }}{% for error in registration_form.password.errors %}<span class = "errors">[{{ error }}]</span>{% endfor %}<br>
+                            </p>
+                            <p>
+                              Rewrite Password:<br>
+                              {{ registration_form.password2(size=30) }}{% for error in registration_form.password2.errors %}<span class = "errors">[{{ error }}]</span>{% endfor %}<br>
+                            </p>
+                            <p>
+                              {{ registration_form.register }}
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- JavaScript -->
+<script>
+    $('nav.signedout li').click(function(){
+        formTarget = $(this).attr('data-form-toggle');
+        $(this).addClass("active").siblings().removeClass("active");
+        $("form[name=" + formTarget + "]").removeClass("hidden").siblings().addClass("hidden");
+    })
+
+    $('textarea#visit_description').keyup(function(){
+        var desired_length = 25;
+        var current_length = $(this).val().length;
+        var remaining_chars = desired_length - current_length
+        if(remaining_chars < 0){remaining_chars = 0;}
+        $('#char_required').text("(" + remaining_chars + " Char Required)")
+    });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

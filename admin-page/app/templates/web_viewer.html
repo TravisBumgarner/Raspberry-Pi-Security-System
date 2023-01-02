@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Web Viewer</title>
+    <!-- CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.min.css" />
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+
+
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-xs-12">
+            <nav class = "signedin blue-bg">
+                <ul>
+                    <li role="presentation"><a href="{{ url_for('web_viewer') }}">Web Viewer</a></li>
+                    <li role="presentation"><a href="{{ url_for('logout') }}">Logout</a></li>
+                    {% if current_user.admin_access %}
+                    <li role="presentation"><a target="_blank" href="{{ url_for('admin.index') }}">Admin</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <div class="row margin-top">
+                 <div class="col-xs-12">
+                    <div class="blue-bg">
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                <ul class=flashes>
+                                {% for message in messages %}
+                                  <li>{{ message }}</li>
+                                {% endfor %}
+                                </ul>
+                            {% endif %}
+                        {% endwith %}
+
+                        <form action="" method="post" name="search">
+                            {{ form.hidden_tag() }}
+                        {% for error in form.end_date.errors %}<span class="errors">[Start Date: {{ error }}]</span><br>{% endfor %}{% for error in form.start_date.errors %}<span class="errors">[End Date: {{ error }}]</span><br>{% endfor %}{{ form.start_date(type='date', width=50) }} to {{ form.end_date(type='date', width=50) }} {{ form.filter }}<br>
+                            <span class="small-text">(Use date picker if available, otherwise enter dates in YYYY-MM-DD format such as 2017-19-03. Leave empty to get all images.)</span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% for date, hours in gallery|dictsort %}
+                {% for hour, files in hours|dictsort %}
+                <div class="row margin-top">
+                        <div class="col-xs-12">
+                            <h2 class = "blue-bg image-date">Date: {{ date }} -- Hour: {{ hour }}</h2><br>     
+                        </div>
+                    {% for file in files %}
+                        <div class="col-xs-6 col-sm-4 col-md-3 gallery-img">
+                        <a href="{{ url_for('protected', image_date = date, image_hour = hour, file_name = file) }}" data-fancybox="gallery" data-caption="Date: {{ date }}<br>Hour: {{ hour }}<br>File: {{file}}">
+                            <img class="img-responsive lazy" data-original="{{ url_for('protected_thumbs', image_date = date, image_hour = hour, file_name = file) }}" width=350 height=200>
+                        </a>
+                        </div>  
+                        {% endfor %}
+
+                </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script src = "/static/js/lazyload.js" ></script>
+<script>
+var myLazyLoad = new LazyLoad({
+    threshold: 500,
+    throttle: 200
+});
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

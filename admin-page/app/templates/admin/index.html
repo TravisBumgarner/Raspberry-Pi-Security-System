@@ -1,0 +1,21 @@
+		{% extends 'admin/master.html' %}
+
+		{% block body %}
+
+
+
+
+
+
+<div class="row">
+	<div class="col-xs-4">
+		<h2>View Status:</h2>
+		<ul>
+			<li><b>Total Issues:</b> {{ total_issues }}</li>
+			<li><b>Last login - User:</b> {{ last_login_user }} </li>
+			<li><b>Last Login - Date:</b> {{last_login_date }} </li>
+			<li><b>Last login - Issue:</b> {{ last_login_reason }}</li>
+		</ul>
+	</div>
+</div>
+{% endblock %}
